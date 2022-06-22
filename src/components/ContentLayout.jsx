@@ -1,15 +1,17 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Flex, HStack } from '@chakra-ui/react';
 import React from 'react';
-import Sidebar from './Sidebar';
-import TopSection from './TopSection';
+import Content from './Content';
+import { Sidebar } from './Sidebar';
+import { TopSection } from './TopSection';
 
 export const ContentLayout = () => {
   return (
-    <HStack>
+    <HStack pr="100px">
       <Sidebar />
-      <Box>
+      <Flex flex="1" flexDirection="column">
         <TopSection />
-      </Box>
+        <Content />
+      </Flex>
     </HStack>
   );
 };

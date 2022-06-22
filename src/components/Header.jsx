@@ -31,6 +31,7 @@ const AppbarStyle = {
 
 const UserShortcutStyle = {
   bgColor: 'orange.100',
+  fontSize: '23px',
   color: 'white',
   p: '8px 7px 8px 8px',
   h: '43px',
