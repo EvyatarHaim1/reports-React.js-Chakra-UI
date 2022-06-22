@@ -1,30 +1,27 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  VStack,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { Box, ChakraProvider } from '@chakra-ui/react';
+
+import theme from "./theme/index";
+import './theme/styles.css';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { ContentLayout } from './components/ContentLayout';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Text>
-              hello
-            </Text>
-
-          </VStack>
-        </Grid>
+      <Box {...AppContainer}>
+        <Header />
+        <ContentLayout />
+        <Footer />
       </Box>
     </ChakraProvider>
   );
 }
 
 export default App;
+
+
+const AppContainer = {
+  h: '100vh',
+}
