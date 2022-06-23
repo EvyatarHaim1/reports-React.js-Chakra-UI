@@ -1,8 +1,16 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+
+import { AllProjects } from './AllProjects';
+import { NoReport } from './NoReport';
 
 const Content = () => {
-  return <Flex flex="1">Content</Flex>;
+  return (
+    <Box>
+      {/* <NoReport /> */}
+      <AllProjects />
+    </Box>
+  );
 };
 
 export default Content;

@@ -13,10 +13,10 @@ export const Footer = () => {
 
 const FooterContainerStyle = {
   zIndex: 10,
-  position: 'sticky',
+  position: 'fixed',
   color: 'blue.100',
   fontWeight: 'bold',
-  bottom: 0,
+  bottom: '22px',
   px: '100px',
   pb: '22px',
 };

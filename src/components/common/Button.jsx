@@ -5,7 +5,7 @@ const CustomButton = ({ text, type, icon }) => {
   return (
     <Button {...BtnStyle(type)}>
       {text}
-      <Image src={icon} alt="icon" />
+      {icon && <Image src={icon} {...IconStyle} alt="icon" />}
     </Button>
   );
 };
@@ -13,6 +13,12 @@ const CustomButton = ({ text, type, icon }) => {
 export default CustomButton;
 
 const BtnStyle = type => ({
+  cursor: 'pointer',
   color: 'white',
   bgColor: type ? 'blue.300' : 'blue.200',
+  _hover: 'blue.400',
 });
+
+const IconStyle = {
+  pl: '11px',
+};

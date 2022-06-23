@@ -10,10 +10,10 @@ export const TopSection = () => {
   return (
     <HStack {...TopSectionContainerStyle}>
       <Box>
-        <Text>{messages.titles.reports}</Text>
-        <Text>{messages.paragraphs.easilyGenerate}</Text>
+        <Text {...TitleStyle}>{messages.titles.reports}</Text>
+        <Text {...SubtitleStyle}>{messages.paragraphs.easilyGenerate}</Text>
       </Box>
-      <HStack>
+      <HStack flex="1" justify="end">
         <Button text={messages.buttons.selectProject} icon={ArrowIcon} />
         <Button text={messages.buttons.selectGateway} icon={ArrowIcon} />
         <Button text={messages.buttons.fromDate} icon={DateIcon} />
@@ -26,4 +26,17 @@ export const TopSection = () => {
 
 const TopSectionContainerStyle = {
   h: '113px',
+  w: '100%',
+  position: 'sticky',
+  top: '33px',
+};
+
+const TitleStyle = {
+  color: 'blue.500',
+  fontSize: '24px',
+  fontWeight: 'bold',
+};
+
+const SubtitleStyle = {
+  color: 'gray.100',
 };

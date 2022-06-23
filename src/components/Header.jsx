@@ -13,9 +13,7 @@ export const Header = () => (
         <Image {...MenuStyle} src={Logo2} alt="logo" />
       </HStack>
       <HStack>
-        <Box {...UserShortcutStyle}>
-          <Text>{messages.userShortcut}</Text>
-        </Box>
+        <Box {...UserShortcutStyle}>{messages.userShortcut}</Box>
         <Text {...UserTextStyle}>{messages.username}</Text>
       </HStack>
     </HStack>
@@ -30,10 +28,11 @@ const AppbarStyle = {
 };
 
 const UserShortcutStyle = {
+  align: 'center',
   bgColor: 'orange.100',
   fontSize: '23px',
   color: 'white',
-  p: '8px 7px 8px 8px',
+  p: '4px 7px 8px 8px',
   h: '43px',
   w: '43px',
   borderRadius: '5px',

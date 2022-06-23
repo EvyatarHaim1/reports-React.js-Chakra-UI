@@ -6,7 +6,7 @@ import { TopSection } from './TopSection';
 
 export const ContentLayout = () => {
   return (
-    <HStack pr="100px">
+    <HStack pr="100px" flex="1">
       <Sidebar />
       <Flex flex="1" flexDirection="column">
         <TopSection />

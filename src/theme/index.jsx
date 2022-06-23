@@ -17,9 +17,17 @@ const theme = extendTheme({
       100: '#005B96',
       200: '#1BC5BD',
       300: '#005B96',
+      400: '#00628B',
+      500: '#011F4B',
+    },
+    lightBlue: {
+      100: '#F1FAFE',
     },
     lightGray: {
       100: '#F3F6F9',
+    },
+    gray: {
+      100: '#7E8299',
     },
   },
 });
