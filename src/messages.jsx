@@ -18,6 +18,7 @@ export const messages = {
     totalTop: 'TOTAL: 10,065 USD',
     totalBottom: 'TOTAL: 14,065 USD',
     projectTotal: 'TOTAL: 4,000 USD',
+    gatewayTotal: 'GATEWAY TOTAL | 14,065 USD',
     date: 'Date',
     date2: '01/21/2021',
     date3: '01/24/2021',
