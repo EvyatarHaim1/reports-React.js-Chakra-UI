@@ -32,6 +32,7 @@ const SubtitleStyle = {
   w: '470px',
   fontWeight: 'bold',
   mb: '51px',
+  textAlign: 'center',
 };
 
 const NoReportImgStyle = {

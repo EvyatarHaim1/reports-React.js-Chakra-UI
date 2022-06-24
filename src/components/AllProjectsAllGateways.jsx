@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
+import { ProjectRow } from './common/ProjectRow';
+import { TableRow } from './common/TableRow';
 
 export const AllProjectsAllGateways = () => {
   return (
@@ -10,46 +12,54 @@ export const AllProjectsAllGateways = () => {
         <Box mb="34px">
           <Heading {...TitleStyle}>{messages.titles.allProjects}</Heading>
         </Box>
-        <Flex {...ProjectRowStyle}>
-          <Text {...ProjectTitleStyle}>{messages.titles.project1}</Text>
-          <Text {...ProjectTitleStyle}>{messages.paragraphs.totalTop}</Text>
-        </Flex>
-        <Flex {...TableColumnsStyle}>
-          <Text>{messages.paragraphs.date}</Text>
-          <Text>{messages.paragraphs.gateway1}</Text>
-          <Text>{messages.paragraphs.transactionID} </Text>
-          <Text>{messages.paragraphs.amount} </Text>
-        </Flex>
-        <Flex {...TableColumnsStyle}>
-          <Text>{messages.paragraphs.date2}</Text>
-          <Text>{messages.paragraphs.gateway2}</Text>
-          <Text>{messages.paragraphs.transactionExp} </Text>
-          <Text>{messages.paragraphs.amount2} </Text>
-        </Flex>
-        <Flex {...TableColumnsStyle}>
-          <Text>{messages.paragraphs.date3}</Text>
-          <Text>{messages.paragraphs.gateway3}</Text>
-          <Text>{messages.paragraphs.transactionExp} </Text>
-          <Text>{messages.paragraphs.amount3} </Text>
-        </Flex>
-        <Flex {...TableColumnsStyle}>
-          <Text>{messages.paragraphs.date4}</Text>
-          <Text>{messages.paragraphs.gateway4}</Text>
-          <Text>{messages.paragraphs.transactionExp} </Text>
-          <Text>{messages.paragraphs.amount4} </Text>
-        </Flex>
-        <Flex {...ProjectRowStyle}>
-          <Text {...ProjectTitleStyle}>{messages.titles.project2}</Text>
-          <Text {...ProjectTitleStyle}>{messages.paragraphs.projectTotal}</Text>
-        </Flex>
-        <Flex {...ProjectRowStyle}>
-          <Text {...ProjectTitleStyle}>{messages.titles.project3}</Text>
-          <Text {...ProjectTitleStyle}>{messages.paragraphs.projectTotal}</Text>
-        </Flex>
-        <Flex {...ProjectRowStyle}>
-          <Text {...ProjectTitleStyle}>{messages.titles.project4}</Text>
-          <Text {...ProjectTitleStyle}>{messages.paragraphs.projectTotal}</Text>
-        </Flex>
+        <ProjectRow
+          project={messages.titles.project1}
+          total={messages.paragraphs.totalTop}
+        />
+        <TableRow
+          columns={[
+            messages.paragraphs.date,
+            messages.paragraphs.gateway1,
+            messages.paragraphs.transactionID,
+            messages.paragraphs.amount,
+          ]}
+        />
+        <TableRow
+          columns={[
+            messages.paragraphs.date2,
+            messages.paragraphs.gateway2,
+            messages.paragraphs.transactionExp,
+            messages.paragraphs.amount2,
+          ]}
+        />
+        <TableRow
+          columns={[
+            messages.paragraphs.date3,
+            messages.paragraphs.gateway3,
+            messages.paragraphs.transactionExp,
+            messages.paragraphs.amount3,
+          ]}
+        />
+        <TableRow
+          columns={[
+            messages.paragraphs.date4,
+            messages.paragraphs.gateway4,
+            messages.paragraphs.transactionExp,
+            messages.paragraphs.amount4,
+          ]}
+        />
+        <ProjectRow
+          project={messages.titles.project2}
+          total={messages.paragraphs.rowTotal}
+        />
+        <ProjectRow
+          project={messages.titles.project3}
+          total={messages.paragraphs.rowTotal}
+        />
+        <ProjectRow
+          project={messages.titles.project4}
+          total={messages.paragraphs.rowTotal}
+        />
       </Flex>
       <Text {...ProjectTitleStyle}>{messages.paragraphs.totalBottom}</Text>
     </>
@@ -65,14 +75,6 @@ const ContainerStyle = {
 const TitleStyle = {
   fontSize: '16px',
   fontWeight: 'bold',
-};
-
-const ProjectRowStyle = {
-  justify: 'space-between',
-  bgColor: 'white',
-  w: '100%',
-  p: '22px 24px 23px 24px',
-  borderRadius: '10px',
 };
 
 const TableColumnsStyle = {

@@ -11,10 +11,10 @@ const Content = () => {
   return (
     <Box>
       {/* <NoReport /> */}
-      {/* <AllProjectsAllGateways /> */}
-      <AllProjectsGatewayOne />
-      {/* <ProjectOneGatewayOne />
-      <ProjectOneAllGateways /> */}
+      <AllProjectsAllGateways />
+      {/* <AllProjectsGatewayOne /> */}
+      {/* {/* <ProjectOneGatewayOne /> */}
+      {/* <ProjectOneAllGateways /> */}
     </Box>
   );
 };

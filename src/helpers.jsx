@@ -43,3 +43,22 @@ export const TopSectionButtons = [
     type: 'report',
   },
 ];
+
+export const gatewaysIndex = [
+  {
+    name: messages.paragraphs.stripe,
+    color: 'purple.100',
+  },
+  {
+    name: messages.paragraphs.authorize,
+    color: 'orange.200',
+  },
+  {
+    name: messages.paragraphs.gateway3,
+    color: 'yellow.100',
+  },
+  {
+    name: messages.paragraphs.gateway4,
+    color: 'gray.200',
+  },
+];

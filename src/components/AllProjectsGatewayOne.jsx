@@ -26,7 +26,7 @@ export const AllProjectsGatewayOne = () => {
           ))}
         </Flex>
 
-        <Box mx="auto" mt="94px" mb="87.5px">
+        <Box mx="auto" mt="94px" mb="87.5pxs">
           <CustomPieChart />
         </Box>
         <Text {...ButtonSectionStyle} {...TotalTextStyle}>

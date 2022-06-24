@@ -36,4 +36,5 @@ const TitleStyle = {
 
 const SubtitleStyle = {
   color: 'gray.100',
+  fontWeight: 'bold',
 };
