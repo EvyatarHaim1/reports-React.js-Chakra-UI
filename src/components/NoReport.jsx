@@ -4,15 +4,13 @@ import { Flex, Heading, Image, Text } from '@chakra-ui/react';
 import noReport from '../assets/svg/noReportIcon.svg';
 import { messages } from '../messages';
 
-export const NoReport = () => {
-  return (
-    <Flex {...ContainerStyle}>
-      <Heading {...TitleStyle}>{messages.titles.noReports}</Heading>
-      <Text {...SubtitleStyle}>{messages.paragraphs.noReportsParagraph}</Text>
-      <Image src={noReport} {...NoReportImgStyle} alt="noReport" />
-    </Flex>
-  );
-};
+export const NoReport = () => (
+  <Flex {...ContainerStyle}>
+    <Heading {...TitleStyle}>{messages.titles.noReports}</Heading>
+    <Text {...SubtitleStyle}>{messages.paragraphs.noReportsParagraph}</Text>
+    <Image src={noReport} {...NoReportImgStyle} alt="noReport" />
+  </Flex>
+);
 
 const ContainerStyle = {
   flex: '1',

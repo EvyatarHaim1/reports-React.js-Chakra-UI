@@ -1,10 +1,6 @@
 import { extendTheme, theme as base } from '@chakra-ui/react';
 
 const theme = extendTheme({
-  html: {
-    height: '100vh',
-    bgColor: 'red',
-  },
   fonts: {
     heading: `Roboto, ${base.fonts?.heading}`,
     body: `Roboto, ${base.fonts?.body}`,

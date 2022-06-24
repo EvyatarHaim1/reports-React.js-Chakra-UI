@@ -1,30 +1,33 @@
 import React from 'react';
-import { Box, Divider, HStack, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Image, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
 import Logo from '../assets/svg/logo.svg';
 import Logo2 from '../assets/svg/logo2.svg';
 
 export const Header = () => (
-  <Box zIndex={10}>
-    <HStack {...AppbarStyle}>
-      <HStack>
-        <Image src={Logo} alt="logo" />
-        <Image {...MenuStyle} src={Logo2} alt="logo" />
-      </HStack>
-      <HStack>
-        <Box {...UserShortcutStyle}>{messages.userShortcut}</Box>
-        <Text {...UserTextStyle}>{messages.username}</Text>
-      </HStack>
+  <Flex {...AppbarStyle}>
+    <HStack>
+      <Image src={Logo} alt="logo" />
+      <Image {...MenuStyle} src={Logo2} alt="logo" />
     </HStack>
-    <Divider {...DividerStyle} />
-  </Box>
+    <HStack>
+      <Box {...UserShortcutStyle}>{messages.userShortcut}</Box>
+      <Text {...UserTextStyle}>{messages.username}</Text>
+    </HStack>
+  </Flex>
 );
 
 const AppbarStyle = {
   w: '100%',
+  zIndex: '15',
+  pos: 'fixed',
+  top: '0px',
+  bgColor: 'white',
   justifyContent: 'space-between',
-  p: ['35px 35px 16px 35px', '35px 100px 16px 35px'],
+  p: ['21px 35px 16px 35px', '21px 100px 16px 35px'],
+  borderBottom: '2px',
+  borderColor: 'lightGray.100',
 };
 
 const UserShortcutStyle = {
@@ -43,12 +46,6 @@ const UserTextStyle = {
   fontWeight: 'bold',
   fontSize: '16px',
   pl: '3px',
-};
-
-const DividerStyle = {
-  color: 'lightGray.100',
-  h: '2px',
-  w: '100vw',
 };
 
 const MenuStyle = {

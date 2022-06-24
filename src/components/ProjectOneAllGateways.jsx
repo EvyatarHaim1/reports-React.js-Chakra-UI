@@ -6,34 +6,30 @@ import { ProjectColorIndex } from './common/ProjectColorIndex';
 import { gatewaysIndex } from '../helpers';
 import CustomPieChart from './common/PieChart';
 
-export const ProjectOneAllGateways = () => {
-  return (
-    <Flex w="100%">
-      <Flex {...LeftBlockStyle}>
-        <Heading {...TitleStyle}>
-          {messages.titles.projectOneAllGateways}
-        </Heading>
-      </Flex>
-      <Flex {...RightBlockStyle}>
-        <Flex {...ButtonSectionStyle}>
-          {gatewaysIndex.map(({ name, color }) => (
-            <Flex key={name} align="center">
-              <ProjectColorIndex color={color} />
-              <Text {...ProjectTextStyle}>{name}</Text>
-            </Flex>
-          ))}
-        </Flex>
-
-        <Box mx="auto" mt="94px" mb="87.5pxs">
-          <CustomPieChart />
-        </Box>
-        <Text {...ButtonSectionStyle} {...TotalTextStyle}>
-          {messages.paragraphs.projectTotal}
-        </Text>
-      </Flex>
+export const ProjectOneAllGateways = () => (
+  <Flex w="100%">
+    <Flex {...LeftBlockStyle}>
+      <Heading {...TitleStyle}>{messages.titles.projectOneAllGateways}</Heading>
     </Flex>
-  );
-};
+    <Flex {...RightBlockStyle}>
+      <Flex {...ButtonSectionStyle}>
+        {gatewaysIndex.map(({ name, color }) => (
+          <Flex key={name} align="center">
+            <ProjectColorIndex color={color} />
+            <Text {...ProjectTextStyle}>{name}</Text>
+          </Flex>
+        ))}
+      </Flex>
+
+      <Box mx="auto" mt="94px" mb="87.5pxs">
+        <CustomPieChart />
+      </Box>
+      <Text {...ButtonSectionStyle} {...TotalTextStyle}>
+        {messages.paragraphs.projectTotal}
+      </Text>
+    </Flex>
+  </Flex>
+);
 
 const LeftBlockStyle = {
   bgColor: 'lightBlue.100',

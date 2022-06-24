@@ -1,14 +1,12 @@
 import React from 'react';
 import { Button, Image } from '@chakra-ui/react';
 
-const CustomButton = ({ text, type, icon }) => {
-  return (
-    <Button {...BtnStyle(type)}>
-      {text}
-      {icon && <Image src={icon} {...IconStyle} alt="icon" />}
-    </Button>
-  );
-};
+const CustomButton = ({ text, type, icon }) => (
+  <Button {...BtnStyle(type)}>
+    {text}
+    {icon && <Image src={icon} {...IconStyle} alt="icon" />}
+  </Button>
+);
 
 export default CustomButton;
 

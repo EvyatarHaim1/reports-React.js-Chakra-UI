@@ -23,5 +23,6 @@ export default App;
 
 
 const AppContainer = {
-  h: '100vh',
+  h: "100%",
+  overflowY: 'scroll',
 }
