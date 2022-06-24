@@ -12,6 +12,7 @@ const theme = extendTheme({
   colors: {
     orange: {
       100: '#F6CA65',
+      200: '#F24E1E',
     },
     blue: {
       100: '#005B96',
@@ -28,6 +29,13 @@ const theme = extendTheme({
     },
     gray: {
       100: '#7E8299',
+      200: '#6497B1',
+    },
+    purple: {
+      100: '#A259FF',
+    },
+    yellow: {
+      100: '#FFC107',
     },
   },
 });

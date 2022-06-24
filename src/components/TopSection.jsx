@@ -3,8 +3,7 @@ import { Box, HStack, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
 import Button from './common/Button';
-import ArrowIcon from '../assets/svg/arrowDown.svg';
-import DateIcon from '../assets/svg/date.svg';
+import { TopSectionButtons } from '../helpers';
 
 export const TopSection = () => {
   return (
@@ -14,11 +13,9 @@ export const TopSection = () => {
         <Text {...SubtitleStyle}>{messages.paragraphs.easilyGenerate}</Text>
       </Box>
       <HStack flex="1" justify="end">
-        <Button text={messages.buttons.selectProject} icon={ArrowIcon} />
-        <Button text={messages.buttons.selectGateway} icon={ArrowIcon} />
-        <Button text={messages.buttons.fromDate} icon={DateIcon} />
-        <Button text={messages.buttons.toDate} icon={DateIcon} />
-        <Button text={messages.buttons.generateReport} type="report" />
+        {TopSectionButtons.map(({ type, icon, text }) => (
+          <Button key={text} text={text} icon={icon} type={type} />
+        ))}
       </HStack>
     </HStack>
   );

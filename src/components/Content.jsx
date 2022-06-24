@@ -1,14 +1,20 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 
-import { AllProjects } from './AllProjects';
+import { AllProjectsAllGateways } from './AllProjectsAllGateways';
 import { NoReport } from './NoReport';
+import { AllProjectsGatewayOne } from './AllProjectsGatewayOne';
+import { ProjectOneGatewayOne } from './ProjectOneGatewayOne';
+import { ProjectOneAllGateways } from './ProjectOneAllGateways';
 
 const Content = () => {
   return (
     <Box>
       {/* <NoReport /> */}
-      <AllProjects />
+      {/* <AllProjectsAllGateways /> */}
+      <AllProjectsGatewayOne />
+      {/* <ProjectOneGatewayOne />
+      <ProjectOneAllGateways /> */}
     </Box>
   );
 };
