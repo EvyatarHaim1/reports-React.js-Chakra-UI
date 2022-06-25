@@ -7,6 +7,15 @@ import { ProjectColorIndex } from './common/ProjectColorIndex';
 import CustomPieChart from './common/PieChart';
 import { TableRow } from './common/TableRow';
 import { ProjectRow } from './common/ProjectRow';
+import {
+  ButtonSectionStyle,
+  LeftBlockStyle,
+  PieChartStyle,
+  ProjectTextStyle,
+  RightBlockStyle,
+  TitleStyle,
+  TotalTextStyle,
+} from '../theme/classes';
 
 export const AllProjectsGatewayOne = () => (
   <Flex w="100%" mb="107px">
@@ -29,14 +38,14 @@ export const AllProjectsGatewayOne = () => (
         columns={[
           messages.paragraphs.date2,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount2,
+          messages.paragraphs.amount1,
         ]}
       />
       <TableRow
         columns={[
           messages.paragraphs.date3,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount3,
+          messages.paragraphs.amount2,
         ]}
       />
       <TableRow
@@ -44,11 +53,11 @@ export const AllProjectsGatewayOne = () => (
         columns={[
           messages.paragraphs.date4,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount4,
+          messages.paragraphs.amount3,
         ]}
       />
       <ProjectRow
-        noTopSpace
+        topSpace
         project={messages.titles.project2}
         total={messages.paragraphs.rowTotal}
       />
@@ -72,52 +81,10 @@ export const AllProjectsGatewayOne = () => (
         ))}
       </Flex>
 
-      <Box mx="auto" mt="94px" mb="87.5pxs" flex="1">
+      <Box {...PieChartStyle}>
         <CustomPieChart />
       </Box>
       <Text {...TotalTextStyle}>{messages.paragraphs.gatewayTotal}</Text>
     </Flex>
   </Flex>
 );
-
-const LeftBlockStyle = {
-  p: '0px 15px 17px 19px',
-  bgColor: 'lightBlue.100',
-  borderRadius: '10px',
-  flexDirection: 'column',
-  w: '50%',
-  mr: '31px',
-};
-
-const RightBlockStyle = {
-  flexDirection: 'column',
-  w: '50%',
-};
-
-const ButtonSectionStyle = {
-  justify: 'space-evenly',
-  bgColor: 'lightBlue.100',
-  p: '19px 34px 18px 23px',
-  borderRadius: '10px',
-};
-
-const ProjectTextStyle = {
-  pl: '12px',
-  fontSize: '14px',
-  color: 'blue.500',
-};
-
-const TitleStyle = {
-  fontSize: '16px',
-  fontWeight: 'bold',
-  p: '18px 0px 34px 24px',
-};
-
-const TotalTextStyle = {
-  flex: 0,
-  color: 'blue.500',
-  fontWeight: 'bold',
-  bgColor: 'lightBlue.100',
-  p: '19px 34px 18px 23px',
-  borderRadius: '10px',
-};

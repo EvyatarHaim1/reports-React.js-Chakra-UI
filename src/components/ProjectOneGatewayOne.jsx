@@ -2,6 +2,7 @@ import React from 'react';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import { messages } from '../messages';
 import { TableRow } from './common/TableRow';
+import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
 
 export const ProjectOneGatewayOne = () => (
   <>
@@ -20,14 +21,14 @@ export const ProjectOneGatewayOne = () => (
         columns={[
           messages.paragraphs.date2,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount2,
+          messages.paragraphs.amount1,
         ]}
       />
       <TableRow
         columns={[
           messages.paragraphs.date3,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount3,
+          messages.paragraphs.amount2,
         ]}
       />
       <TableRow
@@ -35,11 +36,11 @@ export const ProjectOneGatewayOne = () => (
         columns={[
           messages.paragraphs.date4,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount4,
+          messages.paragraphs.amount3,
         ]}
       />
     </Flex>
-    <Text {...ProjectTitleStyle}>{messages.paragraphs.totalBottom}</Text>
+    <Text {...TotalBottomSectionStyle}>{messages.paragraphs.totalBottom}</Text>
   </>
 );
 
@@ -49,20 +50,4 @@ const ContainerStyle = {
   p: '18px 27px 17px 19px',
   my: '27px',
   borderRadius: '10px',
-};
-
-const TitleStyle = {
-  fontSize: '16px',
-  fontWeight: 'bold',
-  p: '18px 0px 34px 24px',
-};
-
-const ProjectTitleStyle = {
-  h: '53px',
-  borderRadius: '10px',
-  p: '17px 0px 17px 19px',
-  mb: '50px',
-  fontWeight: 'bold',
-  color: 'blue.500',
-  bgColor: 'lightBlue.100',
 };

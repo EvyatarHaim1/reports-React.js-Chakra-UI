@@ -36,7 +36,6 @@ export const messages = {
     amount1: '3964 USD',
     amount2: '2554 USD',
     amount3: '3547 USD',
-    amount4: '3547 USD',
     totalAmount: 'TOTAL: 4,000 USD',
   },
   buttons: {

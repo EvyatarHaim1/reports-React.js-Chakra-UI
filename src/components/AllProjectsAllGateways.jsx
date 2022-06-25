@@ -4,11 +4,12 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { messages } from '../messages';
 import { ProjectRow } from './common/ProjectRow';
 import { TableRow } from './common/TableRow';
+import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
 
 export const AllProjectsAllGateways = () => (
   <>
     <Flex {...ContainerStyle}>
-      <Box mb="34px">
+      <Box>
         <Heading {...TitleStyle}>{messages.titles.allProjects}</Heading>
       </Box>
       <ProjectRow
@@ -30,7 +31,7 @@ export const AllProjectsAllGateways = () => (
           messages.paragraphs.date2,
           messages.paragraphs.gateway2,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount2,
+          messages.paragraphs.amount1,
         ]}
       />
       <TableRow
@@ -38,7 +39,7 @@ export const AllProjectsAllGateways = () => (
           messages.paragraphs.date3,
           messages.paragraphs.gateway3,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount3,
+          messages.paragraphs.amount2,
         ]}
       />
       <TableRow
@@ -47,11 +48,11 @@ export const AllProjectsAllGateways = () => (
           messages.paragraphs.date4,
           messages.paragraphs.gateway4,
           messages.paragraphs.transactionExp,
-          messages.paragraphs.amount4,
+          messages.paragraphs.amount3,
         ]}
       />
       <ProjectRow
-        noTopSpace
+        topSpace
         project={messages.titles.project2}
         total={messages.paragraphs.rowTotal}
       />
@@ -64,7 +65,7 @@ export const AllProjectsAllGateways = () => (
         total={messages.paragraphs.rowTotal}
       />
     </Flex>
-    <Text {...ProjectTitleStyle}>{messages.paragraphs.totalBottom}</Text>
+    <Text {...TotalBottomSectionStyle}>{messages.paragraphs.totalBottom}</Text>
   </>
 );
 
@@ -73,19 +74,5 @@ const ContainerStyle = {
   bgColor: 'lightBlue.100',
   p: '18px 27px 17px 19px',
   my: '27px',
-};
-
-const TitleStyle = {
-  fontSize: '16px',
-  fontWeight: 'bold',
-};
-
-const ProjectTitleStyle = {
-  h: '53px',
   borderRadius: '10px',
-  p: '17px 0px 17px 19px',
-  mb: '27px',
-  fontWeight: 'bold',
-  color: 'blue.500',
-  bgColor: 'lightBlue.100',
 };

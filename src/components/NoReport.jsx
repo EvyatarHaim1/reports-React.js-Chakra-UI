@@ -17,6 +17,7 @@ const ContainerStyle = {
   flexDirection: 'column',
   justify: 'center',
   align: 'center',
+  mb: '50px',
 };
 
 const TitleStyle = {

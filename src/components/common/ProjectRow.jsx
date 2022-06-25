@@ -1,20 +1,20 @@
 import React from 'react';
 import { Flex, Text } from '@chakra-ui/react';
 
-export const ProjectRow = ({ project, total, noTopSpace }) => (
-  <Flex {...ProjectRowStyle(noTopSpace)}>
+export const ProjectRow = ({ project, total, topSpace }) => (
+  <Flex {...ProjectRowStyle(topSpace)}>
     <Text {...ProjectTitleStyle}>{project}</Text>
     <Text {...ProjectTitleStyle}>{total}</Text>
   </Flex>
 );
 
-const ProjectRowStyle = noTopSpace => ({
+const ProjectRowStyle = topSpace => ({
   justify: 'space-between',
   bgColor: 'white',
   w: '100%',
   p: '22px 24px 23px 24px',
   borderRadius: '10px',
-  mt: noTopSpace ? '11px' : '5px',
+  mt: topSpace ? '11px' : '5px',
 });
 
 const ProjectTitleStyle = {
