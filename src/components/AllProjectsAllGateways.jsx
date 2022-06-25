@@ -81,6 +81,10 @@ const TitleStyle = {
 };
 
 const ProjectTitleStyle = {
+  h: '53px',
+  borderRadius: '10px',
+  p: '17px 0px 17px 19px',
+  mb: '27px',
   fontWeight: 'bold',
   color: 'blue.500',
   bgColor: 'lightBlue.100',

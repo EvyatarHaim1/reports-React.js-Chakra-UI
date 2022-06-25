@@ -14,7 +14,7 @@ const ProjectRowStyle = noTopSpace => ({
   w: '100%',
   p: '22px 24px 23px 24px',
   borderRadius: '10px',
-  mt: noTopSpace ? '0px' : '5px',
+  mt: noTopSpace ? '11px' : '5px',
 });
 
 const ProjectTitleStyle = {
