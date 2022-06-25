@@ -10,8 +10,8 @@ import { ProjectOneGatewayOne } from './ProjectOneGatewayOne';
 export const Content = () => (
   <Box {...ScrollStyle}>
     {/* <NoReport /> */}
-    <AllProjectsAllGateways />
-    {/* <AllProjectsGatewayOne /> */}
+    {/* <AllProjectsAllGateways /> */}
+    <AllProjectsGatewayOne />
     {/* <ProjectOneAllGateways /> */}
     {/* {/* <ProjectOneGatewayOne /> */}
   </Box>

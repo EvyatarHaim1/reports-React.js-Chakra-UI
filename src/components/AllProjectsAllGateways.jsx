@@ -16,7 +16,7 @@ export const AllProjectsAllGateways = () => (
         total={messages.paragraphs.totalTop}
       />
       <TableRow
-        firstRow
+        allGateways
         columns={[
           messages.paragraphs.date,
           messages.paragraphs.gateway1,
