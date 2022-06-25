@@ -8,7 +8,7 @@ import { ProjectOneAllGateways } from './ProjectOneAllGateways';
 import { ProjectOneGatewayOne } from './ProjectOneGatewayOne';
 
 export const Content = () => {
-  const [currentScreen, setCurrentScreen] = useState('ProjectOneGatewayOne');
+  const [currentScreen, setCurrentScreen] = useState('');
 
   const renderScreen = () => {
     if (currentScreen === 'AllProjectsAllGateways')
