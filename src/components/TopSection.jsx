@@ -20,10 +20,12 @@ export const TopSection = () => (
 );
 
 const TopSectionContainerStyle = {
+  zIndex: 15,
   h: '113px',
   w: '100%',
   pos: 'sticky',
   top: '60px',
+  bgColor: 'white',
 };
 
 const TitleStyle = {

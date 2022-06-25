@@ -7,8 +7,8 @@ import { AllProjectsGatewayOne } from './AllProjectsGatewayOne';
 import { ProjectOneAllGateways } from './ProjectOneAllGateways';
 import { ProjectOneGatewayOne } from './ProjectOneGatewayOne';
 
-const Content = () => (
-  <Box>
+export const Content = () => (
+  <Box {...ScrollStyle}>
     {/* <NoReport /> */}
     <AllProjectsAllGateways />
     {/* <AllProjectsGatewayOne /> */}
@@ -17,4 +17,4 @@ const Content = () => (
   </Box>
 );
 
-export default Content;
+const ScrollStyle = {};

@@ -17,6 +17,11 @@ export const Sidebar = () => (
 );
 
 const SidebarContainerStyle = {
+  zIndex: 15,
+  h: '113px',
+  pos: 'sticky',
+  top: '60px',
   w: '100px',
   p: '41px 40px 0px 36px',
+  mt: '-5px',
 };

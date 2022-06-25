@@ -1,6 +1,7 @@
-import { Flex, HStack } from '@chakra-ui/react';
 import React from 'react';
-import Content from './Content';
+import { Flex, HStack } from '@chakra-ui/react';
+
+import { Content } from './Content';
 import { Sidebar } from './Sidebar';
 import { TopSection } from './TopSection';
 
@@ -16,9 +17,8 @@ export const ContentLayout = () => (
 
 const LayoutStyle = {
   w: '100%',
-  pos: 'fixed',
-  top: '80px',
+  pos: 'sticky',
+  mt: '80px',
   pr: '100px',
-  flex: '1',
   align: 'start',
 };
