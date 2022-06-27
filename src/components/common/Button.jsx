@@ -14,7 +14,7 @@ const BtnStyle = type => ({
   cursor: 'pointer',
   color: 'white',
   bgColor: type ? 'blue.300' : 'blue.200',
-  _hover: 'blue.400',
+  hover: 'blue.400',
 });
 
 const IconStyle = {

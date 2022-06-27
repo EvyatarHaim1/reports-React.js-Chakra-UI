@@ -8,18 +8,18 @@ import { ProjectOneAllGateways } from './ProjectOneAllGateways';
 import { ProjectOneGatewayOne } from './ProjectOneGatewayOne';
 
 export const Content = () => {
-  const [currentScreen, setCurrentScreen] = useState('');
+  const [currentScreen, setCurrentScreen] = useState('AllProjectsGatewayOne');
+
+  const screens = {
+    AllProjectsAllGateways: <AllProjectsAllGateways />,
+    AllProjectsGatewayOne: <AllProjectsGatewayOne />,
+    ProjectOneAllGateways: <ProjectOneAllGateways />,
+    ProjectOneGatewayOne: <ProjectOneGatewayOne />,
+    NoReport: <NoReport />,
+  };
 
   const renderScreen = () => {
-    if (currentScreen === 'AllProjectsAllGateways')
-      return <AllProjectsAllGateways />;
-    else if (currentScreen === 'AllProjectsGatewayOne')
-      return <AllProjectsGatewayOne />;
-    else if (currentScreen === 'ProjectOneAllGateways')
-      return <ProjectOneAllGateways />;
-    else if (currentScreen === 'ProjectOneGatewayOne')
-      return <ProjectOneGatewayOne />;
-    else return <NoReport />;
+    return screens[currentScreen];
   };
 
   return <Box>{renderScreen()}</Box>;

@@ -6,7 +6,7 @@ import './theme/styles.css';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ContentLayout } from './components/ContentLayout';
-import { fetchUsers } from './api/fetchUsers';
+import { fetchGateways, fetchProjects, fetchUsers } from './api/fetchUsers';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -15,8 +15,9 @@ function App() {
   const [report, setreport] = useState([]);
 
   useEffect(() => {
-    setUsers(fetchUsers());
-    console.log(users);
+    fetchUsers();
+    fetchGateways();
+    fetchProjects();
   }, []);
 
   return (
