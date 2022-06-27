@@ -6,7 +6,7 @@ import './theme/styles.css';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ContentLayout } from './components/ContentLayout';
-import { ChooseUserModal } from './components/common/ChooseUserrModal';
+import { ChooseUserModal } from './components/common/ChooseUserModal';
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -14,9 +14,9 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Box>
-        <Header />
-        <ContentLayout />
+        <Header onOpen={onOpen} />
         <ChooseUserModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+        <ContentLayout />
         <Footer />
       </Box>
     </ChakraProvider >

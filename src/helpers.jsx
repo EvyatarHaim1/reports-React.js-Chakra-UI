@@ -1,5 +1,3 @@
-import ArrowIcon from './assets/svg/arrowDown.svg';
-import DateIcon from './assets/svg/date.svg';
 import { messages } from './messages';
 
 export const projectsIndex = [
@@ -21,34 +19,6 @@ export const projectsIndex = [
   },
 ];
 
-export const TopSectionButtons = [
-  {
-    icon: ArrowIcon,
-    text: messages.buttons.selectProject,
-    click: 'selectProject',
-  },
-  {
-    icon: ArrowIcon,
-    text: messages.buttons.selectGateway,
-    click: ' selectGateways',
-  },
-  {
-    icon: DateIcon,
-    text: messages.buttons.fromDate,
-    click: 'date',
-  },
-  {
-    icon: DateIcon,
-    text: messages.buttons.toDate,
-    click: 'date',
-  },
-  {
-    text: messages.buttons.generateReport,
-    type: 'report',
-    click: 'report',
-  },
-];
-
 export const gatewaysIndex = [
   {
     name: messages.paragraphs.stripe,
@@ -66,4 +36,18 @@ export const gatewaysIndex = [
     name: messages.paragraphs.gateway4,
     color: 'gray.200',
   },
+];
+
+export const projectOptions = [
+  messages.titles.project1,
+  messages.titles.project2,
+  messages.titles.project3,
+  messages.titles.project4,
+];
+
+export const gatewaysOptions = [
+  messages.paragraphs.gateway1,
+  messages.paragraphs.gateway2,
+  messages.paragraphs.gateway3,
+  messages.paragraphs.gateway4,
 ];

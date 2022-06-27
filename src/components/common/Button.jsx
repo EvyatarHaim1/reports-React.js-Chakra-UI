@@ -1,23 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Button, Image } from '@chakra-ui/react';
-import { Calendar } from './Calendar';
-import { Dropdown } from './Dropdown';
 
-const CustomButton = ({ text, type, icon, click }) => {
-  const handleClick = () => {
-    if (click === 'selectProject') return <Dropdown />;
-    else if (click === 'selectGateways') return <Dropdown />;
-    else if (click === 'date') return <Calendar />;
-    else {
-      console.log('report');
-    }
-  };
+const CustomButton = ({ text, type, icon }) => {
+  const BtnRef = useRef(null);
 
   return (
-    <Button
-      {...BtnStyle(type)}
-      // onClick={handleClick}
-    >
+    <Button ref={BtnRef} {...BtnStyle}>
       {text}
       {icon && <Image src={icon} {...IconStyle} alt="icon" />}
     </Button>
@@ -26,12 +14,14 @@ const CustomButton = ({ text, type, icon, click }) => {
 
 export default CustomButton;
 
-const BtnStyle = type => ({
+const BtnStyle = {
   cursor: 'pointer',
   color: 'white',
-  bgColor: type ? 'blue.300' : 'blue.200',
+  bgColor: 'blue.300',
+  minW: '135px',
+  maxW: '135px',
   hover: 'blue.400',
-});
+};
 
 const IconStyle = {
   pl: '11px',

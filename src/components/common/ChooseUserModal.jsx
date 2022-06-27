@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import AppContext from '../../contexts/AppContext';
 import {
   Modal,
@@ -18,7 +18,7 @@ import { messages } from '../../messages';
 export const ChooseUserModal = ({ isOpen, onClose }) => {
   const { users } = useContext(AppContext);
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={false} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Choose A User</ModalHeader>

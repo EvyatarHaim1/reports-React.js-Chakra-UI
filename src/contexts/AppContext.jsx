@@ -9,6 +9,7 @@ export function AppProvider({ children }) {
   const [projects, setProjects] = useState([]);
   const [gateways, setGateways] = useState([]);
   const [report, setreport] = useState([]);
+  const [currentScreen, setCurrentScreen] = useState('NoReport');
 
   useEffect(() => {
     fetchUsers();
@@ -64,6 +65,8 @@ export function AppProvider({ children }) {
         setGateways,
         report,
         setreport,
+        currentScreen,
+        setCurrentScreen,
       }}
     >
       {children}

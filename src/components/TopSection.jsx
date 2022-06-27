@@ -3,20 +3,32 @@ import { Box, HStack, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
 import Button from './common/Button';
-import { TopSectionButtons } from '../helpers';
+import { Dropdown } from './common/Dropdown';
+import { Calendar } from './common/Calendar';
+import { gatewaysOptions, projectOptions } from '../helpers';
 
 export const TopSection = () => (
-  <HStack {...TopSectionContainerStyle}>
-    <Box>
-      <Text {...TitleStyle}>{messages.titles.reports}</Text>
-      <Text {...SubtitleStyle}>{messages.paragraphs.easilyGenerate}</Text>
-    </Box>
-    <HStack flex="1" justify="end">
-      {TopSectionButtons.map(({ type, icon, text, click }) => (
-        <Button key={text} text={text} icon={icon} type={type} click={click} />
-      ))}
+  <>
+    <HStack {...TopSectionContainerStyle}>
+      <Box>
+        <Text {...TitleStyle}>{messages.titles.reports}</Text>
+        <Text {...SubtitleStyle}>{messages.paragraphs.easilyGenerate}</Text>
+      </Box>
+      <HStack flex="1" justify="end">
+        <Dropdown
+          text={messages.buttons.selectProject}
+          options={projectOptions}
+        />
+        <Dropdown
+          text={messages.buttons.selectGateway}
+          options={gatewaysOptions}
+        />
+        <Calendar text={messages.buttons.fromDate} />
+        <Calendar text={messages.buttons.toDate} />
+        <Button text={messages.buttons.generateReport} click={''} />
+      </HStack>
     </HStack>
-  </HStack>
+  </>
 );
 
 const TopSectionContainerStyle = {
