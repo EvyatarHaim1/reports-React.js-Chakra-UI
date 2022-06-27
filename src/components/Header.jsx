@@ -4,19 +4,22 @@ import { Box, Flex, HStack, Image, Text } from '@chakra-ui/react';
 import { messages } from '../messages';
 import Logo from '../assets/svg/logo.svg';
 import Logo2 from '../assets/svg/logo2.svg';
+import { ChooseUserModal } from './common/ChooseUserModal;
 
-export const Header = () => (
-  <Flex {...AppbarStyle}>
-    <HStack>
-      <Image src={Logo} alt="logo" />
-      <Image {...MenuStyle} src={Logo2} alt="logo" />
-    </HStack>
-    <HStack>
-      <Box {...UserShortcutStyle}>{messages.userShortcut}</Box>
-      <Text {...UserTextStyle}>{messages.username}</Text>
-    </HStack>
-  </Flex>
-);
+export const Header = () => {
+  return (
+    <Flex {...AppbarStyle}>
+      <HStack>
+        <Image src={Logo} alt="logo" />
+        <Image {...MenuStyle} src={Logo2} alt="logo" />
+      </HStack>
+      <HStack>
+        <Box {...UserShortcutStyle}>{messages.userShortcut}</Box>
+        <Text {...UserTextStyle}>{messages.username}</Text>
+      </HStack>
+    </Flex>
+  );
+};
 
 const AppbarStyle = {
   w: '100%',

@@ -10,6 +10,10 @@ export const messages = {
     project2: 'Project 2',
     project3: 'Project 3',
     project4: 'Project 4',
+    userId: 'UserId:',
+    firstName: 'First-Name:',
+    lastName: 'Last-Name:',
+    email: 'Email:',
   },
   paragraphs: {
     easilyGenerate: 'Easily generate a report of your transactions',
@@ -37,6 +41,8 @@ export const messages = {
     amount2: '2554 USD',
     amount3: '3547 USD',
     totalAmount: 'TOTAL: 4,000 USD',
+    userModal:
+      'Choose a user from Mock API or change it later by click the header right section',
   },
   buttons: {
     selectProject: 'Select project',

@@ -12,8 +12,8 @@ export const TopSection = () => (
       <Text {...SubtitleStyle}>{messages.paragraphs.easilyGenerate}</Text>
     </Box>
     <HStack flex="1" justify="end">
-      {TopSectionButtons.map(({ type, icon, text }) => (
-        <Button key={text} text={text} icon={icon} type={type} />
+      {TopSectionButtons.map(({ type, icon, text, click }) => (
+        <Button key={text} text={text} icon={icon} type={type} click={click} />
       ))}
     </HStack>
   </HStack>

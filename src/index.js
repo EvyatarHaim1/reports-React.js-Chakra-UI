@@ -1,6 +1,7 @@
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import App from './App';
+import { AppProvider } from './contexts/AppContext';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
@@ -9,7 +10,9 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <App />
+    <AppProvider>
+      <App />
+    </AppProvider>
   </StrictMode>
 );
 

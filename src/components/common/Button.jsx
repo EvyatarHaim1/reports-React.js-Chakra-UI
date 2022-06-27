@@ -1,12 +1,28 @@
 import React from 'react';
 import { Button, Image } from '@chakra-ui/react';
+import { Calendar } from './Calendar';
+import { Dropdown } from './Dropdown';
 
-const CustomButton = ({ text, type, icon }) => (
-  <Button {...BtnStyle(type)}>
-    {text}
-    {icon && <Image src={icon} {...IconStyle} alt="icon" />}
-  </Button>
-);
+const CustomButton = ({ text, type, icon, click }) => {
+  const handleClick = () => {
+    if (click === 'selectProject') return <Dropdown />;
+    else if (click === 'selectGateways') return <Dropdown />;
+    else if (click === 'date') return <Calendar />;
+    else {
+      console.log('report');
+    }
+  };
+
+  return (
+    <Button
+      {...BtnStyle(type)}
+      // onClick={handleClick}
+    >
+      {text}
+      {icon && <Image src={icon} {...IconStyle} alt="icon" />}
+    </Button>
+  );
+};
 
 export default CustomButton;
 

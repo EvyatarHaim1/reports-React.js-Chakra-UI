@@ -25,22 +25,27 @@ export const TopSectionButtons = [
   {
     icon: ArrowIcon,
     text: messages.buttons.selectProject,
+    click: 'selectProject',
   },
   {
     icon: ArrowIcon,
     text: messages.buttons.selectGateway,
+    click: ' selectGateways',
   },
   {
     icon: DateIcon,
     text: messages.buttons.fromDate,
+    click: 'date',
   },
   {
     icon: DateIcon,
     text: messages.buttons.toDate,
+    click: 'date',
   },
   {
     text: messages.buttons.generateReport,
     type: 'report',
+    click: 'report',
   },
 ];
 
