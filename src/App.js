@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, ChakraProvider, useDisclosure } from '@chakra-ui/react';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 
 import theme from "./theme/index";
 import './theme/styles.css';
@@ -9,13 +9,11 @@ import { ContentLayout } from './components/ContentLayout';
 import { ChooseUserModal } from './components/common/ChooseUserModal';
 
 function App() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <ChakraProvider theme={theme}>
       <Box>
-        <Header onOpen={onOpen} />
-        <ChooseUserModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+        <Header />
+        <ChooseUserModal />
         <ContentLayout />
         <Footer />
       </Box>

@@ -15,17 +15,20 @@ import {
 } from '@chakra-ui/react';
 import { messages } from '../../messages';
 
-export const ChooseUserModal = ({ isOpen, onClose }) => {
-  const { users } = useContext(AppContext);
+export const ChooseUserModal = () => {
+  const { users, isOpenModal, closeModal } = useContext(AppContext);
   return (
-    <Modal isOpen={false} onClose={onClose}>
+    <Modal isOpen={isOpenModal} onClose={closeModal}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Choose A User</ModalHeader>
+        <ModalHeader>{messages.titles.userModalTitle}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {messages.paragraphs.userModal}
-          <Divider />
+          <Divider my="10px" />
+          <Text fontWeight="bold" mb="15px">
+            {messages.paragraphs.userQuantity} {users.length}
+          </Text>
           {users?.map(({ userId, firstName, lastName, email }) => (
             <Box key={userId}>
               <Text>
@@ -45,10 +48,9 @@ export const ChooseUserModal = ({ isOpen, onClose }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose()}>
+          <Button colorScheme="blue" mr={3} onClick={closeModal}>
             Close
           </Button>
-          <Button variant="ghost">save</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

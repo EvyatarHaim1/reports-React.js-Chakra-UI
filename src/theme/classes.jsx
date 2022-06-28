@@ -63,3 +63,17 @@ export const ProjectTextStyle = {
   fontSize: '14px',
   color: 'blue.500',
 };
+
+export const DropdownStyle = {
+  color: 'white',
+  cursor: 'pointer',
+  bgColor: 'blue.200',
+  maxW: '145px',
+  minW: '145px',
+  hover: 'blue.400',
+  fontSize: '14px',
+};
+
+export const IconStyle = {
+  pt: '6px',
+};

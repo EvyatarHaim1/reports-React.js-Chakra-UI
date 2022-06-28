@@ -14,6 +14,7 @@ export const messages = {
     firstName: 'First-Name:',
     lastName: 'Last-Name:',
     email: 'Email:',
+    userModalTitle: 'User Details from API',
   },
   paragraphs: {
     easilyGenerate: 'Easily generate a report of your transactions',
@@ -42,7 +43,8 @@ export const messages = {
     amount3: '3547 USD',
     totalAmount: 'TOTAL: 4,000 USD',
     userModal:
-      'Choose a user from Mock API or change it later by click the header right section',
+      'This data is the users api response. click the header right section to view it',
+    userQuantity: 'Users quantity:',
   },
   buttons: {
     selectProject: 'Select project',

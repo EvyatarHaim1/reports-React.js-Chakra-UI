@@ -1,11 +1,9 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Button, Image } from '@chakra-ui/react';
 
-const CustomButton = ({ text, type, icon }) => {
-  const BtnRef = useRef(null);
-
+const CustomButton = ({ text, icon, click }) => {
   return (
-    <Button ref={BtnRef} {...BtnStyle}>
+    <Button {...BtnStyle} onClick={click}>
       {text}
       {icon && <Image src={icon} {...IconStyle} alt="icon" />}
     </Button>

@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Flex, HStack, Image, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
 import Logo from '../assets/svg/logo.svg';
 import Logo2 from '../assets/svg/logo2.svg';
+import AppContext from '../contexts/AppContext';
 
-export const Header = ({ onOpen }) => {
+export const Header = () => {
+  const { openModal } = useContext(AppContext);
   return (
     <Flex {...AppbarStyle}>
       <HStack>
         <Image src={Logo} alt="logo" />
         <Image {...MenuStyle} src={Logo2} alt="logo" />
       </HStack>
-      <HStack onClick={onOpen}>
+      <HStack onClick={openModal}>
         <Box {...UserShortcutStyle}>{messages.userShortcut}</Box>
         <Text {...UserTextStyle}>{messages.username}</Text>
       </HStack>

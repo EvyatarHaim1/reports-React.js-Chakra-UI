@@ -7,6 +7,7 @@ import { AllProjectsGatewayOne } from './AllProjectsGatewayOne';
 import { ProjectOneAllGateways } from './ProjectOneAllGateways';
 import { ProjectOneGatewayOne } from './ProjectOneGatewayOne';
 import AppContext from '../contexts/AppContext';
+import { Reports } from './Reports';
 
 export const Content = () => {
   const { currentScreen } = useContext(AppContext);
@@ -15,7 +16,7 @@ export const Content = () => {
     AllProjectsGatewayOne: <AllProjectsGatewayOne />,
     ProjectOneAllGateways: <ProjectOneAllGateways />,
     ProjectOneGatewayOne: <ProjectOneGatewayOne />,
-    NoReport: <NoReport />,
+    Report: <Reports />,
   };
 
   const renderScreen = () => {

@@ -8,14 +8,29 @@ export function AppProvider({ children }) {
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
   const [gateways, setGateways] = useState([]);
-  const [report, setreport] = useState([]);
-  const [currentScreen, setCurrentScreen] = useState('NoReport');
+  const [reports, setreports] = useState(null);
+  const [currentScreen, setCurrentScreen] = useState('Report');
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
+  const [isOpenModal, setOpenModal] = useState(true);
+  const [projectsState, setProjectsState] = useState('');
+  const [gatewaysState, setGatewaysState] = useState('');
 
   useEffect(() => {
     fetchUsers();
     fetchProjects();
     fetchGateways();
   }, []);
+
+  useEffect(() => {
+    if (projectsState === 'project 1') {
+      if (gatewaysState === 'Gateway 1') {
+        setCurrentScreen('ProjectOneGatewayOne');
+      } else {
+        setCurrentScreen('ProjectOneAllGateways');
+      }
+    }
+  }, [projectsState, gatewaysState, currentScreen]);
 
   const fetchUsers = () => {
     axios
@@ -44,14 +59,17 @@ export function AppProvider({ children }) {
       .catch(error => console.error(`Something went wrong ${error}`));
   };
 
-  //   const postReport = () => {
-  //     axios
-  //       .post(`${API_BASE_URL}/report`, {})
-  //       .then(res => {
-  //         setreport(res.data.data);
-  //       })
-  //       .catch(error => console.error(`Something went wrong ${error}`));
-  //   };
+  const postReport = (fromDate, toDate) => {
+    axios
+      .post(`${API_BASE_URL}/report`, { from: fromDate, to: toDate })
+      .then(res => {
+        setreports(res.data.data);
+      })
+      .catch(error => console.error(`Something went wrong ${error}`));
+  };
+
+  const openModal = () => setOpenModal(true);
+  const closeModal = () => setOpenModal(false);
 
   console.log(users);
   return (
@@ -63,10 +81,23 @@ export function AppProvider({ children }) {
         setProjects,
         gateways,
         setGateways,
-        report,
-        setreport,
+        reports,
+        setreports,
         currentScreen,
         setCurrentScreen,
+        fromDate,
+        setFromDate,
+        toDate,
+        setToDate,
+        postReport,
+        isOpenModal,
+        closeModal,
+        openModal,
+        setOpenModal,
+        projectsState,
+        setProjectsState,
+        gatewaysState,
+        setGatewaysState,
       }}
     >
       {children}
