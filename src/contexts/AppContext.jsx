@@ -17,6 +17,7 @@ export function AppProvider({ children }) {
   const [isGatewayModal, setGatewayModal] = useState(false);
   const [projectsState, setProjectsState] = useState('');
   const [gatewaysState, setGatewaysState] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -83,8 +84,9 @@ export function AppProvider({ children }) {
     axios
       .post(`${API_BASE_URL}/report`, { from: fromDate, to: toDate })
       .then(res => {
-        setReports(res.data);
+        setReports(res.data.data);
         setCurrentScreen('Report');
+        setShowToast(true);
       })
       .catch(error => console.error(`Something went wrong ${error}`));
   };
@@ -132,6 +134,8 @@ export function AppProvider({ children }) {
         setGatewayModal,
         openGatewayModal,
         closeGatewayModal,
+        showToast,
+        setShowToast,
       }}
     >
       {children}

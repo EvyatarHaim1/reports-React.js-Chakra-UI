@@ -9,40 +9,13 @@ import { ProjectDropDown } from './common/ProjectDropDown';
 import { GatewaysDropdown } from './common/GatewaysDropdown';
 
 export const TopSection = () => {
-  const { reports, postReport, fromDate, toDate } = useContext(AppContext);
+  const { postReport, fromDate, toDate } = useContext(AppContext);
 
-  const toast = useToast();
-
-  const NoReportsToast = () =>
-    toast({
-      title: 'No Reports Found.',
-      description: 'Try to increase the date range',
-      status: 'warning',
-      position: 'top',
-      duration: 5000,
-      isClosable: true,
-    });
-
-  const ReportsSuccesToast = () =>
-    toast({
-      title: 'Fetching reports successfully',
-      description: 'You can review all the result from report API',
-      status: 'success',
-      position: 'top',
-      duration: 5000,
-      isClosable: true,
-    });
-
-  const handleReport = () => {
+  const handleReport = async () => {
     if (!fromDate || !toDate) {
       alert('Please choose 2 dates in order to generate a report');
     } else {
-      postReport(fromDate, toDate);
-      if (!reports.lengh) {
-        NoReportsToast();
-      } else {
-        ReportsSuccesToast();
-      }
+      await postReport(fromDate, toDate);
     }
   };
 

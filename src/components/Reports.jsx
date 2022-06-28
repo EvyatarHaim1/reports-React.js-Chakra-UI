@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Box,
   Text,
@@ -10,6 +10,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  useToast,
 } from '@chakra-ui/react';
 
 import AppContext from '../contexts/AppContext';
@@ -17,9 +18,45 @@ import { NoReport } from './NoReport';
 import { messages } from '../messages';
 
 export const Reports = () => {
-  const { reports } = useContext(AppContext);
+  const { reports, showToast, setShowToast } = useContext(AppContext);
+
+  useEffect(() => {}, [reports]);
+  const toast = useToast();
+
+  const NoReportsToast = () =>
+    toast({
+      title: 'No Reports Found.',
+      description: 'Try to increase the date range',
+      status: 'warning',
+      position: 'top',
+      duration: 2000,
+      isClosable: true,
+    });
+
+  const ReportsSuccesToast = () =>
+    toast({
+      title: 'Fetching reports successfully',
+      description: 'You can review all the result from report API',
+      status: 'success',
+      position: 'top',
+      duration: 2000,
+      isClosable: true,
+    });
+
+  const handleToast = () => {
+    if (showToast) {
+      if (!reports.length) {
+        NoReportsToast();
+      } else {
+        ReportsSuccesToast();
+      }
+    }
+    setShowToast(false);
+  };
+
   return (
     <Box>
+      {handleToast()}
       {!reports.length ? (
         <NoReport />
       ) : (
