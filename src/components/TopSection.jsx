@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack, Text, useToast } from '@chakra-ui/react';
 
 import { messages } from '../messages';
 import Button from './common/Button';
@@ -9,15 +9,43 @@ import { ProjectDropDown } from './common/ProjectDropDown';
 import { GatewaysDropdown } from './common/GatewaysDropdown';
 
 export const TopSection = () => {
-  const { postReport, fromDate, toDate } = useContext(AppContext);
+  const { reports, postReport, fromDate, toDate } = useContext(AppContext);
+
+  const toast = useToast();
+
+  const NoReportsToast = () =>
+    toast({
+      title: 'No Reports Found.',
+      description: 'Try to increase the date range',
+      status: 'warning',
+      position: 'top',
+      duration: 5000,
+      isClosable: true,
+    });
+
+  const ReportsSuccesToast = () =>
+    toast({
+      title: 'Fetching reports successfully',
+      description: 'You can review all the result from report API',
+      status: 'success',
+      position: 'top',
+      duration: 5000,
+      isClosable: true,
+    });
 
   const handleReport = () => {
     if (!fromDate || !toDate) {
       alert('Please choose 2 dates in order to generate a report');
     } else {
       postReport(fromDate, toDate);
+      if (!reports.lengh) {
+        NoReportsToast();
+      } else {
+        ReportsSuccesToast();
+      }
     }
   };
+
   return (
     <>
       <HStack {...TopSectionContainerStyle}>

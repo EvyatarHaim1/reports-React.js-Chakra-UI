@@ -39,6 +39,7 @@ export const gatewaysIndex = [
 ];
 
 export const projectOptions = [
+  messages.titles.projects,
   messages.titles.project1,
   messages.titles.project2,
   messages.titles.project3,
@@ -46,6 +47,7 @@ export const projectOptions = [
 ];
 
 export const gatewaysOptions = [
+  messages.titles.gateways,
   messages.paragraphs.gateway1,
   messages.paragraphs.gateway2,
   messages.paragraphs.gateway3,

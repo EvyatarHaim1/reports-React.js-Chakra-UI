@@ -8,7 +8,7 @@ import { messages } from '../../messages';
 
 export const ProjectDropDown = () => {
   const [selected, setselected] = useState('');
-  const { setProjectsState, setGatewaysState } = useContext(AppContext);
+  const { setProjectsState } = useContext(AppContext);
 
   const handleSelect = e => {
     setselected(e.target.value);

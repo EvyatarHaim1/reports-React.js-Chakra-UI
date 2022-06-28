@@ -8,6 +8,8 @@ import { ProjectOneAllGateways } from './ProjectOneAllGateways';
 import { ProjectOneGatewayOne } from './ProjectOneGatewayOne';
 import AppContext from '../contexts/AppContext';
 import { Reports } from './Reports';
+import { ProjectsModal } from './common/ProjectsModal';
+import { GatewaysModal } from './common/GatewaysModal';
 
 export const Content = () => {
   const { currentScreen } = useContext(AppContext);
@@ -23,5 +25,11 @@ export const Content = () => {
     return screens[currentScreen];
   };
 
-  return <Box>{renderScreen()}</Box>;
+  return (
+    <Box>
+      {renderScreen()}
+      <ProjectsModal />
+      <GatewaysModal />
+    </Box>
+  );
 };

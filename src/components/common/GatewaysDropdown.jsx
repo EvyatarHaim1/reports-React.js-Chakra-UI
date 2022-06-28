@@ -13,6 +13,7 @@ export const GatewaysDropdown = () => {
   const handleSelect = e => {
     setselected(e.target.value);
     console.log(e.target.value);
+    setGatewaysState(e.target.value);
   };
 
   return (

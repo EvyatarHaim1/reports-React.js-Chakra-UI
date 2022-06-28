@@ -15,6 +15,10 @@ export const messages = {
     lastName: 'Last-Name:',
     email: 'Email:',
     userModalTitle: 'User Details from API',
+    projectModalTitle: 'All Projects Details from projects API',
+    gatewayModalTitle: 'All Gateways Details from Gateways API',
+    projects: 'All Projects',
+    gateways: 'All Gateways',
   },
   paragraphs: {
     easilyGenerate: 'Easily generate a report of your transactions',

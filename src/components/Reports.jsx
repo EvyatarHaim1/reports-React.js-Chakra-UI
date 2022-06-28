@@ -20,7 +20,7 @@ export const Reports = () => {
   const { reports } = useContext(AppContext);
   return (
     <Box>
-      {!reports ? (
+      {!reports.length ? (
         <NoReport />
       ) : (
         <Box>

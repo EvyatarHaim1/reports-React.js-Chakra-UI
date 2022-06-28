@@ -8,11 +8,13 @@ export function AppProvider({ children }) {
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
   const [gateways, setGateways] = useState([]);
-  const [reports, setreports] = useState(null);
+  const [reports, setReports] = useState([]);
   const [currentScreen, setCurrentScreen] = useState('Report');
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [isOpenModal, setOpenModal] = useState(true);
+  const [isProjectModal, setProjectModal] = useState(false);
+  const [isGatewayModal, setGatewayModal] = useState(false);
   const [projectsState, setProjectsState] = useState('');
   const [gatewaysState, setGatewaysState] = useState('');
 
@@ -23,14 +25,32 @@ export function AppProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    if (projectsState === 'project 1') {
+    if (projectsState === 'Project 1') {
       if (gatewaysState === 'Gateway 1') {
         setCurrentScreen('ProjectOneGatewayOne');
       } else {
         setCurrentScreen('ProjectOneAllGateways');
       }
+    } else if (projectsState === 'All Projects') {
+      if (gatewaysState === 'Gateway 1') {
+        setCurrentScreen('AllProjectsGatewayOne');
+      } else {
+        setCurrentScreen('AllProjectsAllGateways');
+      }
     }
-  }, [projectsState, gatewaysState, currentScreen]);
+  }, [projectsState, gatewaysState]);
+
+  useEffect(() => {
+    if (projectsState === 'All Projects') {
+      setProjectModal(true);
+    }
+  }, [projectsState]);
+
+  useEffect(() => {
+    if (gatewaysState === 'All Gateways') {
+      setGatewayModal(true);
+    }
+  }, [gatewaysState]);
 
   const fetchUsers = () => {
     axios
@@ -63,7 +83,8 @@ export function AppProvider({ children }) {
     axios
       .post(`${API_BASE_URL}/report`, { from: fromDate, to: toDate })
       .then(res => {
-        setreports(res.data.data);
+        setReports(res.data);
+        setCurrentScreen('Report');
       })
       .catch(error => console.error(`Something went wrong ${error}`));
   };
@@ -71,7 +92,12 @@ export function AppProvider({ children }) {
   const openModal = () => setOpenModal(true);
   const closeModal = () => setOpenModal(false);
 
-  console.log(users);
+  const openProjectModal = () => setProjectModal(true);
+  const closeProjectModal = () => setProjectModal(false);
+
+  const openGatewayModal = () => setGatewayModal(true);
+  const closeGatewayModal = () => setGatewayModal(false);
+
   return (
     <AppContext.Provider
       value={{
@@ -82,7 +108,7 @@ export function AppProvider({ children }) {
         gateways,
         setGateways,
         reports,
-        setreports,
+        setReports,
         currentScreen,
         setCurrentScreen,
         fromDate,
@@ -98,6 +124,14 @@ export function AppProvider({ children }) {
         setProjectsState,
         gatewaysState,
         setGatewaysState,
+        isProjectModal,
+        setProjectModal,
+        openProjectModal,
+        closeProjectModal,
+        isGatewayModal,
+        setGatewayModal,
+        openGatewayModal,
+        closeGatewayModal,
       }}
     >
       {children}
