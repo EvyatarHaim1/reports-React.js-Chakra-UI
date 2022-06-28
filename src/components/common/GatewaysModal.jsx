@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import AppContext from '../../contexts/AppContext';
 import {
-  Image,
   Modal,
   Button,
   ModalOverlay,
@@ -20,6 +18,8 @@ import {
   Box,
   ModalCloseButton,
 } from '@chakra-ui/react';
+
+import AppContext from '../../contexts/AppContext';
 import { messages } from '../../messages';
 
 export const GatewaysModal = () => {
@@ -43,13 +43,13 @@ export const GatewaysModal = () => {
                 <TableCaption my="30px"></TableCaption>
                 <Thead>
                   <Tr>
-                    <Th>gatewayId</Th>
-                    <Th>userIds</Th>
-                    <Th> name</Th>
-                    <Th> type</Th>
-                    <Th> apiKey</Th>
-                    <Th> secondaryApiKey</Th>
-                    <Th> description</Th>
+                    <Th>{messages.table.gatewayId}</Th>
+                    <Th>{messages.table.userIds}</Th>
+                    <Th> {messages.table.name}</Th>
+                    <Th> {messages.table.type}</Th>
+                    <Th> {messages.table.apiKey}</Th>
+                    <Th> {messages.table.secondaryApiKey}</Th>
+                    <Th> {messages.table.description}</Th>
                   </Tr>
                 </Thead>
                 {gateways.map(gateway => (
@@ -71,7 +71,7 @@ export const GatewaysModal = () => {
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={closeGatewayModal}>
-            Close
+            {messages.buttons.close}
           </Button>
         </ModalFooter>
       </ModalContent>

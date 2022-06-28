@@ -53,3 +53,10 @@ export const gatewaysOptions = [
   messages.paragraphs.gateway3,
   messages.paragraphs.gateway4,
 ];
+
+export const filterReportOption = [
+  messages.filteroptions.fieldName,
+  messages.filteroptions.description,
+  messages.filteroptions.fieldType,
+  messages.filteroptions.format,
+];

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, HStack, Text, useToast } from '@chakra-ui/react';
+import { Box, HStack, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
 import Button from './common/Button';
@@ -13,7 +13,7 @@ export const TopSection = () => {
 
   const handleReport = async () => {
     if (!fromDate || !toDate) {
-      alert('Please choose 2 dates in order to generate a report');
+      alert(messages.alerts.twoDateMandatory);
     } else {
       await postReport(fromDate, toDate);
     }

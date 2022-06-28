@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import PickerIcon from '../../assets/svg/date.svg';
 import AppContext from '../../contexts/AppContext';
+import { messages } from '../../messages';
 
 export const Calendar = ({ text }) => {
   const [startDate, setStartDate] = useState(new Date('01-01-2021'));
@@ -13,7 +14,7 @@ export const Calendar = ({ text }) => {
   const handleChangeDate = date => {
     let formatedDate = moment(date).format('YYYY-MM-DD');
     setStartDate(date);
-    if (text === 'From date') {
+    if (text === messages.buttons.fromDate) {
       setFromDate(formatedDate);
     } else {
       setToDate(formatedDate);
@@ -22,8 +23,8 @@ export const Calendar = ({ text }) => {
 
   const renderPlaceholder = () => {
     if (
-      (text === 'From date' && !fromDate) ||
-      (text === 'To date' && !toDate)
+      (text === messages.buttons.fromDate && !fromDate) ||
+      (text === messages.buttons.toDate && !toDate)
     ) {
       return text;
     }

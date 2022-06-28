@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Select } from '@chakra-ui/react';
+
 import { ArrowDownIcon } from '../../assets/svg/arrowDown';
 import AppContext from '../../contexts/AppContext';
 import { DropdownStyle, IconStyle } from '../../theme/classes';

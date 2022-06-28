@@ -79,7 +79,7 @@ export const ProjectsModal = () => {
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={closeProjectModal}>
-            Close
+            {messages.buttons.close}
           </Button>
         </ModalFooter>
       </ModalContent>

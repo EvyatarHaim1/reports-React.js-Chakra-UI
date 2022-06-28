@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Image } from '@chakra-ui/react';
+
 import Graphs from '../assets/svg/graphsIcon.svg';
 import Apps from '../assets/svg/appsIcon.svg';
 import Review from '../assets/svg/reviewIcon.svg';

@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Box } from '@chakra-ui/react';
 
-import { NoReport } from './NoReport';
 import { AllProjectsAllGateways } from './AllProjectsAllGateways';
 import { AllProjectsGatewayOne } from './AllProjectsGatewayOne';
 import { ProjectOneAllGateways } from './ProjectOneAllGateways';

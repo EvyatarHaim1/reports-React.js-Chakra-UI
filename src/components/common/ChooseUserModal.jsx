@@ -13,6 +13,7 @@ import {
   Text,
   ModalCloseButton,
 } from '@chakra-ui/react';
+
 import { messages } from '../../messages';
 
 export const ChooseUserModal = () => {
@@ -49,7 +50,7 @@ export const ChooseUserModal = () => {
 
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={closeModal}>
-            Close
+            {messages.buttons.close}
           </Button>
         </ModalFooter>
       </ModalContent>

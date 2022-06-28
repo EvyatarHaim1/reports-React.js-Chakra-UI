@@ -16,6 +16,7 @@ import {
 import AppContext from '../contexts/AppContext';
 import { NoReport } from './NoReport';
 import { messages } from '../messages';
+import { FilterSearch } from './common/FilterSearch';
 
 export const Reports = () => {
   const { reports, showToast, setShowToast } = useContext(AppContext);
@@ -25,8 +26,8 @@ export const Reports = () => {
 
   const NoReportsToast = () =>
     toast({
-      title: 'No Reports Found.',
-      description: 'Try to increase the date range',
+      title: messages.toasts.noReports.title,
+      description: messages.toasts.noReports.description,
       status: 'warning',
       position: 'top',
       duration: 2000,
@@ -35,8 +36,8 @@ export const Reports = () => {
 
   const ReportsSuccesToast = () =>
     toast({
-      title: 'Fetching reports successfully',
-      description: 'You can review all the result from report API',
+      title: messages.toasts.reportsSucceeded.title,
+      description: messages.toasts.reportsSucceeded.description,
       status: 'success',
       position: 'top',
       duration: 2000,
@@ -61,18 +62,19 @@ export const Reports = () => {
         <NoReport />
       ) : (
         <Box>
-          <Text>{messages.titles.reports}</Text>
+          <FilterSearch />
+          <Text>{messages.titles.allPayments}</Text>
           <TableContainer>
             <Table variant="simple">
-              <TableCaption>All the Payments from API</TableCaption>
+              <TableCaption></TableCaption>
               <Thead>
                 <Tr>
-                  <Th>paymentId</Th>
-                  <Th>amount</Th>
-                  <Th> projectId</Th>
-                  <Th> gatewayId</Th>
-                  <Th> userIds</Th>
-                  <Th> modified</Th>
+                  <Th>{messages.table.paymentId}</Th>
+                  <Th>{messages.table.amount}</Th>
+                  <Th> {messages.table.projectId}</Th>
+                  <Th> {messages.table.gatewayId}</Th>
+                  <Th> {messages.table.userIds}</Th>
+                  <Th> {messages.table.modified}</Th>
                 </Tr>
               </Thead>
               {reports.map(report => (
