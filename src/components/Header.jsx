@@ -14,7 +14,7 @@ export const Header = () => {
         <Image src={Logo} alt="logo" />
         <Image {...MenuStyle} src={Logo2} alt="logo" />
       </HStack>
-      <HStack onClick={openModal}>
+      <HStack onClick={openModal} cursor="pointer">
         <Box {...UserShortcutStyle}>{messages.userShortcut}</Box>
         <Text {...UserTextStyle}>{messages.username}</Text>
       </HStack>

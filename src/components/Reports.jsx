@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Box,
   Text,
@@ -19,9 +19,18 @@ import { messages } from '../messages';
 import { FilterSearch } from './common/FilterSearch';
 
 export const Reports = () => {
-  const { reports, showToast, setShowToast } = useContext(AppContext);
+  const { reports, isFiltered, filteredReports, showToast, setShowToast } =
+    useContext(AppContext);
+  const [results, setResult] = useState(reports);
 
-  useEffect(() => {}, [reports]);
+  useEffect(() => {
+    if (isFiltered) {
+      setResult(filteredReports);
+    } else {
+      setResult(reports);
+    }
+  }, [filteredReports, isFiltered, reports]);
+
   const toast = useToast();
 
   const NoReportsToast = () =>
@@ -75,9 +84,10 @@ export const Reports = () => {
                   <Th> {messages.table.gatewayId}</Th>
                   <Th> {messages.table.userIds}</Th>
                   <Th> {messages.table.modified}</Th>
+                  <Th> {messages.table.created}</Th>
                 </Tr>
               </Thead>
-              {reports.map(report => (
+              {results.map(report => (
                 <Tbody key={report.paymentId}>
                   <Tr>
                     <Td>{report.paymentId}</Td>
@@ -86,6 +96,7 @@ export const Reports = () => {
                     <Td>{report.gatewayId}</Td>
                     <Td>{report.userIds}</Td>
                     <Td>{report.modified}</Td>
+                    <Td>{report.created}</Td>
                   </Tr>
                 </Tbody>
               ))}

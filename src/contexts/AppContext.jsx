@@ -9,6 +9,7 @@ export function AppProvider({ children }) {
   const [projects, setProjects] = useState([]);
   const [gateways, setGateways] = useState([]);
   const [reports, setReports] = useState([]);
+  const [filteredReports, setFilteredReports] = useState([]);
   const [currentScreen, setCurrentScreen] = useState('Report');
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
@@ -18,6 +19,7 @@ export function AppProvider({ children }) {
   const [projectsState, setProjectsState] = useState('');
   const [gatewaysState, setGatewaysState] = useState('');
   const [showToast, setShowToast] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -84,7 +86,13 @@ export function AppProvider({ children }) {
     axios
       .post(`${API_BASE_URL}/report`, { from: fromDate, to: toDate })
       .then(res => {
-        setReports(res.data.data);
+        let data = res.data.data;
+        let formatReports = data.map(report =>
+          Object.keys(report).forEach(key => report[key].toLowerCase())
+        );
+        console.log(formatReports);
+        setReports(formatReports);
+        setFilteredReports(formatReports);
         setCurrentScreen('Report');
         setShowToast(true);
       })
@@ -136,6 +144,10 @@ export function AppProvider({ children }) {
         closeGatewayModal,
         showToast,
         setShowToast,
+        filteredReports,
+        setFilteredReports,
+        isFiltered,
+        setIsFiltered,
       }}
     >
       {children}

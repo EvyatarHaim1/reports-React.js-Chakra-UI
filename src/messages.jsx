@@ -65,10 +65,10 @@ export const messages = {
   userShortcut: 'JD',
   footerContent: 'Terms&Conditions | Privacy policy',
   filteroptions: {
-    fieldName: 'Field Name',
-    description: 'Description',
-    fieldType: 'Field Type',
-    format: 'Format',
+    from: 'From',
+    to: 'To',
+    projectId: 'projectId',
+    gatewayId: 'gatewayId',
   },
   table: {
     paymentId: 'paymentId',
@@ -82,6 +82,7 @@ export const messages = {
     apiKey: 'apiKey',
     secondaryApiKey: 'secondaryApiKey',
     description: 'description',
+    created: 'created',
   },
   toasts: {
     noReports: {

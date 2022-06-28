@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Flex,
   Input,
@@ -10,21 +10,53 @@ import { FiSearch } from 'react-icons/fi';
 
 import { filterReportOption } from '../../helpers';
 import { messages } from '../../messages';
+import AppContext from '../../contexts/AppContext';
 
-export const FilterSearch = ({ reports }) => {
-  const [filteredReports, setFilteredReports] = useState(reports);
+export const FilterSearch = () => {
   const [currentFilter, setFilter] = useState('');
   const [searchValue, setsearchValue] = useState('');
   const [currentSort, setSort] = useState('');
 
+  const { setFilteredReports, setIsFiltered, filteredReports, reports } =
+    useContext(AppContext);
+
+  useEffect(() => {
+    if (searchValue && (currentSort || currentFilter)) {
+      setIsFiltered(true);
+    } else {
+      setIsFiltered(false);
+      setFilteredReports(reports);
+    }
+  }, [
+    currentFilter,
+    currentSort,
+    reports,
+    searchValue,
+    setFilteredReports,
+    setIsFiltered,
+  ]);
+
   const handleSearch = async e => {
-    let name = e.target.value;
-    setsearchValue(name);
-    // let filteredData = results.filter(value =>
-    //   report.name.includes(name.toLowerCase())
-    // );
-    // setUrlsBySearch(filteredData);
-    // setCurrentPage(1);
+    setsearchValue(e.target.value);
+
+    if (currentSort) {
+      setFilteredReports(
+        filteredReports.sort((a, b) =>
+          b[currentSort] > a[currentSort]
+            ? 1
+            : b[currentSort] < a[currentSort]
+            ? -1
+            : 0
+        )
+      );
+    }
+    if (currentFilter) {
+      setFilteredReports(
+        filteredReports.filter(report =>
+          report[currentFilter].includes(searchValue.toLowerCase())
+        )
+      );
+    }
   };
 
   const handleFilter = e => {
@@ -66,16 +98,15 @@ export const FilterSearch = ({ reports }) => {
         ))}
       </Select>
       <Select
-        // {...DropdownStyle}
         placeholder={messages.buttons.sort}
-        value={currentFilter}
+        value={currentSort}
         onChange={handleSort}
       >
         {filterReportOption.map(option => (
           <option
             key={option}
             style={{ backgroundColor: '#7E8299' }}
-            value={currentSort}
+            value={option}
           >
             {option}
           </option>

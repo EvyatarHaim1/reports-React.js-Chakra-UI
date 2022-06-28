@@ -55,8 +55,8 @@ export const gatewaysOptions = [
 ];
 
 export const filterReportOption = [
-  messages.filteroptions.fieldName,
-  messages.filteroptions.description,
-  messages.filteroptions.fieldType,
-  messages.filteroptions.format,
+  messages.filteroptions.from,
+  messages.filteroptions.to,
+  messages.filteroptions.projectId,
+  messages.filteroptions.gatewayId,
 ];
