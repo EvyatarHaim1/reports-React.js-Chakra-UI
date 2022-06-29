@@ -87,10 +87,14 @@ export function AppProvider({ children }) {
       .post(`${API_BASE_URL}/report`, { from: fromDate, to: toDate })
       .then(res => {
         let data = res.data.data;
-        let formatReports = data.map(report =>
-          Object.keys(report).forEach(key => report[key].toLowerCase())
+        let formatReports = data.map(reportObj =>
+          Object.fromEntries(
+            Object.entries(reportObj).map(([k, v]) => [
+              k,
+              v.toString().toLowerCase(),
+            ])
+          )
         );
-        console.log(formatReports);
         setReports(formatReports);
         setFilteredReports(formatReports);
         setCurrentScreen('Report');

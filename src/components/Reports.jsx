@@ -88,7 +88,7 @@ export const Reports = () => {
                 </Tr>
               </Thead>
               {results.map(report => (
-                <Tbody key={report.paymentId}>
+                <Tbody key={report.amount}>
                   <Tr>
                     <Td>{report.paymentId}</Td>
                     <Td>{report.amount}</Td>
