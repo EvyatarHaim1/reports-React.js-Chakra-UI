@@ -13,15 +13,15 @@ import { messages } from '../../messages';
 import AppContext from '../../contexts/AppContext';
 
 export const FilterSearch = () => {
-  const [currentFilter, setFilter] = useState('');
   const [searchValue, setsearchValue] = useState('');
+  const [currentFilter, setFilter] = useState('');
   const [currentSort, setSort] = useState('');
 
   const { setFilteredReports, setIsFiltered, filteredReports, reports } =
     useContext(AppContext);
 
   useEffect(() => {
-    if (searchValue && (currentSort || currentFilter)) {
+    if ((searchValue && currentFilter) || currentSort) {
       setIsFiltered(true);
     } else {
       setIsFiltered(false);
@@ -39,23 +39,26 @@ export const FilterSearch = () => {
   const handleSearch = async e => {
     setsearchValue(e.target.value);
 
-    if (currentSort) {
-      setFilteredReports(
-        filteredReports.sort((a, b) =>
-          b[currentSort] > a[currentSort]
-            ? 1
-            : b[currentSort] < a[currentSort]
-            ? -1
-            : 0
-        )
-      );
-    }
     if (currentFilter) {
-      setFilteredReports(
-        filteredReports.filter(report =>
-          report[currentFilter].includes(searchValue.toLowerCase())
-        )
-      );
+      if (currentFilter === messages.filteroptions.from) {
+        setFilteredReports(
+          filteredReports.filter(report =>
+            report.created.includes(e.target.value)
+          )
+        );
+      } else if (currentFilter === messages.filteroptions.to) {
+        setFilteredReports(
+          filteredReports.filter(report =>
+            report.modified.includes(e.target.value)
+          )
+        );
+      } else {
+        setFilteredReports(
+          filteredReports.filter(report =>
+            report[currentFilter].includes(e.target.value)
+          )
+        );
+      }
     }
   };
 
@@ -65,6 +68,33 @@ export const FilterSearch = () => {
 
   const handleSort = e => {
     setSort(e.target.value);
+    let prevSort = e.target.value;
+    if (prevSort === e.target.value) setIsFiltered(false);
+    if (e.target.value === messages.filteroptions.from) {
+      setFilteredReports(
+        filteredReports.sort((a, b) => {
+          if (a.created < b.created) return -1;
+          if (a.created > b.created) return 1;
+          else return 0;
+        })
+      );
+    } else if (e.target.value === messages.filteroptions.to) {
+      setFilteredReports(
+        filteredReports.sort((a, b) => {
+          if (a.modified < b.modified) return -1;
+          if (a.modified > b.modified) return 1;
+          else return 0;
+        })
+      );
+    } else {
+      setFilteredReports(
+        filteredReports.sort((a, b) => {
+          if (a[e.target.value] < b[e.target.value]) return -1;
+          if (a[e.target.value] > b[e.target.value]) return 1;
+          else return 0;
+        })
+      );
+    }
   };
 
   return (
