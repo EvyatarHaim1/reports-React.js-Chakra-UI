@@ -75,6 +75,7 @@ export const messages = {
     amount: 'amount',
     projectId: 'projectId',
     gatewayId: 'gatewayId',
+    gatewayIds: 'gatewayIds',
     userIds: 'userIds',
     modified: 'modified',
     name: 'name',
@@ -83,6 +84,11 @@ export const messages = {
     secondaryApiKey: 'secondaryApiKey',
     description: 'description',
     created: 'created',
+    rule: 'rule',
+    structure: 'structure',
+    industry: 'industry',
+    website: 'website',
+    image: 'image',
   },
   toasts: {
     noReports: {

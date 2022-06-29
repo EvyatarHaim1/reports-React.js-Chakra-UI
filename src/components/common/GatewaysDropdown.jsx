@@ -25,11 +25,7 @@ export const GatewaysDropdown = () => {
       onChange={handleSelect}
     >
       {gatewaysOptions.map(option => (
-        <option
-          key={option}
-          style={{ backgroundColor: '#7E8299' }}
-          value={option}
-        >
+        <option key={option} style={{ backgroundColor: 'gray' }} value={option}>
           {option}
         </option>
       ))}

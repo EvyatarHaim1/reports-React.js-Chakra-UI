@@ -20,18 +20,14 @@ import {
   Box,
   ModalCloseButton,
 } from '@chakra-ui/react';
+
 import { messages } from '../../messages';
 
 export const ProjectsModal = () => {
   const { projects, isProjectModal, closeProjectModal } =
     useContext(AppContext);
   return (
-    <Modal
-      w="100vw"
-      h="100vh"
-      isOpen={isProjectModal}
-      onClose={closeProjectModal}
-    >
+    <Modal isOpen={isProjectModal} onClose={closeProjectModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{messages.titles.projectModalTitle}</ModalHeader>
@@ -43,16 +39,16 @@ export const ProjectsModal = () => {
                 <TableCaption my="30px"></TableCaption>
                 <Thead>
                   <Tr>
-                    <Th>projectId</Th>
-                    <Th>userIds</Th>
-                    <Th> rule</Th>
-                    <Th> gatewayIds</Th>
-                    <Th> structure</Th>
-                    <Th> industry</Th>
-                    <Th> website</Th>
-                    <Th> description</Th>
-                    <Th> image</Th>
-                    <Th> name</Th>
+                    <Th>{messages.table.projectId}</Th>
+                    <Th>{messages.table.userIds}</Th>
+                    <Th> {messages.table.rule}</Th>
+                    <Th> {messages.table.gatewayIds}</Th>
+                    <Th> {messages.table.structure}</Th>
+                    <Th> {messages.table.industry}</Th>
+                    <Th> {messages.table.website}</Th>
+                    <Th> {messages.table.description}</Th>
+                    <Th> {messages.table.image}</Th>
+                    <Th> {messages.table.name}</Th>
                   </Tr>
                 </Thead>
                 {projects.map(project => (

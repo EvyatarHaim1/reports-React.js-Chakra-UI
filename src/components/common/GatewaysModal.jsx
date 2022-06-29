@@ -26,12 +26,7 @@ export const GatewaysModal = () => {
   const { gateways, isGatewayModal, closeGatewayModal } =
     useContext(AppContext);
   return (
-    <Modal
-      w="100vw"
-      h="100vh"
-      isOpen={isGatewayModal}
-      onClose={closeGatewayModal}
-    >
+    <Modal isOpen={isGatewayModal} onClose={closeGatewayModal}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{messages.titles.gatewayModalTitle}</ModalHeader>

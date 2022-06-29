@@ -103,7 +103,7 @@ export const FilterSearch = () => {
         <InputLeftElement
           pointerEvents="none"
           fontSize="1.2em"
-          children={<FiSearch color="#0043C0" width="17.23px" />}
+          children={<FiSearch color="blue.100" width="17.23px" />}
         />
         <Input
           type="text"
@@ -120,7 +120,7 @@ export const FilterSearch = () => {
         {filterReportOption.map(option => (
           <option
             key={option}
-            style={{ backgroundColor: '#7E8299' }}
+            style={{ backgroundColor: 'gray' }}
             value={option}
           >
             {option}
@@ -135,7 +135,7 @@ export const FilterSearch = () => {
         {filterReportOption.map(option => (
           <option
             key={option}
-            style={{ backgroundColor: '#7E8299' }}
+            style={{ backgroundColor: 'gray' }}
             value={option}
           >
             {option}
