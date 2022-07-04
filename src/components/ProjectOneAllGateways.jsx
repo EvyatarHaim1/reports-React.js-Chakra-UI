@@ -22,7 +22,7 @@ export const ProjectOneAllGateways = () => (
     <Flex {...LeftBlockStyle}>
       <Heading {...TitleStyle}>{messages.titles.projectOneAllGateways}</Heading>
       <ProjectRow
-        project={messages.titles.project1}
+        project={messages.paragraphs.gateway1}
         total={messages.paragraphs.totalTop}
       />
       <TableRow
@@ -58,15 +58,15 @@ export const ProjectOneAllGateways = () => (
       />
       <ProjectRow
         topSpace
-        project={messages.titles.project2}
+        project={messages.paragraphs.gateway2}
         total={messages.paragraphs.rowTotal}
       />
       <ProjectRow
-        project={messages.titles.project3}
+        project={messages.paragraphs.gateway3}
         total={messages.paragraphs.rowTotal}
       />
       <ProjectRow
-        project={messages.titles.project4}
+        project={messages.paragraphs.gateway4}
         total={messages.paragraphs.rowTotal}
       />
     </Flex>

@@ -25,6 +25,8 @@ export const messages = {
     easilyGenerate: 'Easily generate a report of your transactions',
     noReportsParagraph:
       'Currently you have no data for the reports to be generated. Once you start generating traffic through the Balance application the reports will be shown.',
+    total: 'TOTAL:',
+    dollar: 'USD',
     totalTop: 'TOTAL: 10,065 USD',
     totalBottom: 'TOTAL: 14,065 USD',
     rowTotal: 'TOTAL: 4,000 USD',

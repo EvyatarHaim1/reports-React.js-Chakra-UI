@@ -82,9 +82,9 @@ export function AppProvider({ children }) {
       .catch(error => console.error(`Something went wrong ${error}`));
   };
 
-  const postReport = (fromDate, toDate) => {
+  const postReport = body => {
     axios
-      .post(`${API_BASE_URL}/report`, { from: fromDate, to: toDate })
+      .post(`${API_BASE_URL}/report`, body)
       .then(res => {
         let data = res.data.data;
         let formatReports = data.map(reportObj =>
@@ -97,7 +97,7 @@ export function AppProvider({ children }) {
         );
         setReports(formatReports);
         setFilteredReports(formatReports);
-        setCurrentScreen('Report');
+        // setCurrentScreen('Report');
         setShowToast(true);
       })
       .catch(error => console.error(`Something went wrong ${error}`));
