@@ -53,6 +53,7 @@ export const messages = {
     userModal:
       'This data is the users api response. click the header right section to view it',
     userQuantity: 'Users quantity:',
+    fetchingErr: 'There is some problem with the Api response',
   },
   buttons: {
     selectProject: 'Select project',

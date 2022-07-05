@@ -10,7 +10,9 @@ import { MockAllProjectsAllGateways } from './mocks/MockAllProjectsAllGateways';
 
 export const AllProjectsAllGateways = () => {
   const [totalAmount, setTotalAmount] = useState(0);
+  const [projectTotal, setProjectTotal] = useState([]);
   const { reports, postReport, projects, gateways } = useContext(AppContext);
+
   useEffect(() => {
     postReport({
       from: '2021-01-01',
@@ -23,6 +25,20 @@ export const AllProjectsAllGateways = () => {
     }
   }, [gateways, postReport, projects, reports]);
 
+  useEffect(() => {
+    let sum = 0;
+    projects.map(project =>
+      reports
+        .filter(
+          report =>
+            report.projectId.toLowerCase() === project.projectId.toLowerCase()
+        )
+        .map(r => console.log(Number(Math.round(r.amount))))
+    );
+    setProjectTotal(prev => [...prev, sum]);
+    console.log(projectTotal);
+  }, []);
+
   return (
     <>
       <Flex {...ContainerStyle}>
@@ -34,11 +50,21 @@ export const AllProjectsAllGateways = () => {
           <MockAllProjectsAllGateways />
         ) : (
           <>
-            {projects.map(project => (
+            {projects.map((project, index) => (
               <>
                 <ProjectRow
+                  key={project.name}
                   project={project.name}
-                  total={messages.paragraphs.totalTop}
+                  total={
+                    !reports ? (
+                      messages.paragraphs.totalTop
+                    ) : (
+                      <>
+                        {messages.paragraphs.total} {projectTotal[index]}{' '}
+                        {messages.paragraphs.dollar}
+                      </>
+                    )
+                  }
                 />
                 <TableRow
                   allGateways
@@ -50,13 +76,21 @@ export const AllProjectsAllGateways = () => {
                   ]}
                 />
                 {reports
-                  .filter(report => report.projectId === project.projectId)
+                  .filter(
+                    report =>
+                      report.projectId.toLowerCase() ===
+                      project.projectId.toLowerCase()
+                  )
                   .map((row, index) => (
                     <TableRow
+                      key={row.paymentId}
+                      reports={reports}
                       bgColor={index % 2 !== 0 && 'lightBlue.100'}
                       columns={[
                         row.created,
-                        messages.paragraphs.gateway2,
+                        gateways.find(
+                          g => g.gatewayId.toLowerCase() === row?.gatewayId
+                        )?.name,
                         row.paymentId,
                         row.amount,
                       ]}
@@ -68,7 +102,14 @@ export const AllProjectsAllGateways = () => {
         )}
       </Flex>
       <Text {...TotalBottomSectionStyle}>
-        {messages.paragraphs.totalBottom}
+        {!reports ? (
+          messages.paragraphs.totalBottom
+        ) : (
+          <>
+            {messages.paragraphs.total} {totalAmount}{' '}
+            {messages.paragraphs.dollar}
+          </>
+        )}
       </Text>
     </>
   );

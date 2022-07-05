@@ -9,6 +9,8 @@ import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 
 export const ProjectOneGatewayOne = () => {
   const [totalAmount, setTotalAmount] = useState(0);
+  const [title, setTitle] = useState(messages.titles.projectOneGatewayOne);
+
   const {
     reports,
     postReport,
@@ -42,6 +44,7 @@ export const ProjectOneGatewayOne = () => {
     projectToReport,
     gatewayToReport,
   ]);
+
   return (
     <>
       <Flex {...ContainerStyle}>

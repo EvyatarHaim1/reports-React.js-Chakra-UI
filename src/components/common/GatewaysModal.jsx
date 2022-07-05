@@ -17,6 +17,7 @@ import {
   TableContainer,
   Box,
   ModalCloseButton,
+  Flex,
 } from '@chakra-ui/react';
 
 import AppContext from '../../contexts/AppContext';
@@ -25,6 +26,7 @@ import { messages } from '../../messages';
 export const GatewaysModal = () => {
   const { gateways, isGatewayModal, closeGatewayModal } =
     useContext(AppContext);
+
   return (
     <Modal isOpen={isGatewayModal} onClose={closeGatewayModal}>
       <ModalOverlay />
@@ -33,35 +35,39 @@ export const GatewaysModal = () => {
         <ModalCloseButton />
         <ModalBody>
           <Box>
-            <TableContainer>
-              <Table variant="simple">
-                <TableCaption my="30px"></TableCaption>
-                <Thead>
-                  <Tr>
-                    <Th>{messages.table.gatewayId}</Th>
-                    <Th>{messages.table.userIds}</Th>
-                    <Th> {messages.table.name}</Th>
-                    <Th> {messages.table.type}</Th>
-                    <Th> {messages.table.apiKey}</Th>
-                    <Th> {messages.table.secondaryApiKey}</Th>
-                    <Th> {messages.table.description}</Th>
-                  </Tr>
-                </Thead>
-                {gateways.map(gateway => (
-                  <Tbody key={gateway.gatewayId}>
+            {!gateways ? (
+              <Flex justify="center">{messages.paragraphs.fetchingErr}</Flex>
+            ) : (
+              <TableContainer>
+                <Table variant="simple">
+                  <TableCaption my="30px"></TableCaption>
+                  <Thead>
                     <Tr>
-                      <Td>{gateway.gatewayId}</Td>
-                      <Td>{gateway.userIds}</Td>
-                      <Td> {gateway.name}</Td>
-                      <Td>{gateway.type}</Td>
-                      <Td>{gateway.apiKey}</Td>
-                      <Td>{gateway.secondaryApiKey}</Td>
-                      <Td>{gateway.description}</Td>
+                      <Th>{messages.table.gatewayId}</Th>
+                      <Th>{messages.table.userIds}</Th>
+                      <Th> {messages.table.name}</Th>
+                      <Th> {messages.table.type}</Th>
+                      <Th> {messages.table.apiKey}</Th>
+                      <Th> {messages.table.secondaryApiKey}</Th>
+                      <Th> {messages.table.description}</Th>
                     </Tr>
-                  </Tbody>
-                ))}
-              </Table>
-            </TableContainer>
+                  </Thead>
+                  {gateways.map(gateway => (
+                    <Tbody key={gateway.gatewayId}>
+                      <Tr>
+                        <Td>{gateway.gatewayId}</Td>
+                        <Td>{gateway.userIds}</Td>
+                        <Td> {gateway.name}</Td>
+                        <Td>{gateway.type}</Td>
+                        <Td>{gateway.apiKey}</Td>
+                        <Td>{gateway.secondaryApiKey}</Td>
+                        <Td>{gateway.description}</Td>
+                      </Tr>
+                    </Tbody>
+                  ))}
+                </Table>
+              </TableContainer>
+            )}
           </Box>
         </ModalBody>
         <ModalFooter>
