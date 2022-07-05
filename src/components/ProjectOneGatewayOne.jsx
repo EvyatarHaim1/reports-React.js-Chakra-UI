@@ -9,19 +9,39 @@ import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 
 export const ProjectOneGatewayOne = () => {
   const [totalAmount, setTotalAmount] = useState(0);
-  const { reports, postReport, projects, gateways } = useContext(AppContext);
+  const {
+    reports,
+    postReport,
+    projects,
+    gateways,
+    projectsState,
+    gatewaysState,
+  } = useContext(AppContext);
+
+  let projectToReport =
+    projects[projectsState === 'Project 1' ? 0 : 1].projectId;
+
+  let gatewayToReport =
+    gateways[gatewaysState === 'Gateway 1' ? 0 : 1].projectId;
 
   useEffect(() => {
     postReport({
-      projectId: projects[0].projectId,
-      gatewayId: gateways[0].gatewayId,
+      projectId: projectToReport,
+      gatewayId: gatewayToReport,
     });
     let amount = 0;
     if (reports) {
       reports.map(report => (amount += Math.round(report.amount)));
       setTotalAmount(amount);
     }
-  }, [gateways, postReport, projects, reports]);
+  }, [
+    gateways,
+    postReport,
+    projects,
+    reports,
+    projectToReport,
+    gatewayToReport,
+  ]);
   return (
     <>
       <Flex {...ContainerStyle}>
@@ -48,7 +68,7 @@ export const ProjectOneGatewayOne = () => {
         )}
       </Flex>
       <Text {...TotalBottomSectionStyle}>
-        {reports ? (
+        {!reports ? (
           messages.paragraphs.totalBottom
         ) : (
           <>
