@@ -1,73 +1,78 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
 import { ProjectRow } from './common/ProjectRow';
 import { TableRow } from './common/TableRow';
 import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
+import AppContext from '../contexts/AppContext';
+import { MockAllProjectsAllGateways } from './mocks/MockAllProjectsAllGateways';
 
-export const AllProjectsAllGateways = () => (
-  <>
-    <Flex {...ContainerStyle}>
-      <Box>
-        <Heading {...TitleStyle}>{messages.titles.allProjects}</Heading>
-      </Box>
-      <ProjectRow
-        project={messages.titles.project1}
-        total={messages.paragraphs.totalTop}
-      />
-      <TableRow
-        allGateways
-        columns={[
-          messages.paragraphs.date,
-          messages.paragraphs.gateway1,
-          messages.paragraphs.transactionID,
-          messages.paragraphs.amount,
-        ]}
-      />
-      <TableRow
-        bgColor="lightBlue.100"
-        columns={[
-          messages.paragraphs.date2,
-          messages.paragraphs.gateway2,
-          messages.paragraphs.transactionExp,
-          messages.paragraphs.amount1,
-        ]}
-      />
-      <TableRow
-        columns={[
-          messages.paragraphs.date3,
-          messages.paragraphs.gateway3,
-          messages.paragraphs.transactionExp,
-          messages.paragraphs.amount2,
-        ]}
-      />
-      <TableRow
-        bgColor="lightBlue.100"
-        columns={[
-          messages.paragraphs.date4,
-          messages.paragraphs.gateway4,
-          messages.paragraphs.transactionExp,
-          messages.paragraphs.amount3,
-        ]}
-      />
-      <ProjectRow
-        topSpace
-        project={messages.titles.project2}
-        total={messages.paragraphs.rowTotal}
-      />
-      <ProjectRow
-        project={messages.titles.project3}
-        total={messages.paragraphs.rowTotal}
-      />
-      <ProjectRow
-        project={messages.titles.project4}
-        total={messages.paragraphs.rowTotal}
-      />
-    </Flex>
-    <Text {...TotalBottomSectionStyle}>{messages.paragraphs.totalBottom}</Text>
-  </>
-);
+export const AllProjectsAllGateways = () => {
+  const [totalAmount, setTotalAmount] = useState(0);
+  const { reports, postReport, projects, gateways } = useContext(AppContext);
+  useEffect(() => {
+    postReport({
+      from: '2021-01-01',
+      to: '2021-12-31',
+    });
+    let amount = 0;
+    if (reports) {
+      reports.map(report => (amount += Math.round(report.amount)));
+      setTotalAmount(amount);
+    }
+  }, [gateways, postReport, projects, reports]);
+
+  return (
+    <>
+      <Flex {...ContainerStyle}>
+        <Box>
+          <Heading {...TitleStyle}>{messages.titles.allProjects}</Heading>
+        </Box>
+
+        {!reports ? (
+          <MockAllProjectsAllGateways />
+        ) : (
+          <>
+            {projects.map(project => (
+              <>
+                <ProjectRow
+                  project={project.name}
+                  total={messages.paragraphs.totalTop}
+                />
+                <TableRow
+                  allGateways
+                  columns={[
+                    messages.paragraphs.date,
+                    messages.paragraphs.gateway,
+                    messages.paragraphs.transactionID,
+                    messages.paragraphs.amount,
+                  ]}
+                />
+                {reports
+                  .filter(report => report.projectId === project.projectId)
+                  .map((row, index) => (
+                    <TableRow
+                      bgColor={index % 2 !== 0 && 'lightBlue.100'}
+                      columns={[
+                        row.created,
+                        messages.paragraphs.gateway2,
+                        row.paymentId,
+                        row.amount,
+                      ]}
+                    />
+                  ))}
+              </>
+            ))}
+          </>
+        )}
+      </Flex>
+      <Text {...TotalBottomSectionStyle}>
+        {messages.paragraphs.totalBottom}
+      </Text>
+    </>
+  );
+};
 
 const ContainerStyle = {
   flexDirection: 'column',

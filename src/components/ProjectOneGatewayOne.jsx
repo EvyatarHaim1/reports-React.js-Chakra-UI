@@ -5,7 +5,7 @@ import { messages } from '../messages';
 import { TableRow } from './common/TableRow';
 import AppContext from '../contexts/AppContext';
 import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
-import { MockProjectOneGatewayOne } from './mocks/MockProjectOneGatewayOne';
+import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 
 export const ProjectOneGatewayOne = () => {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -21,7 +21,7 @@ export const ProjectOneGatewayOne = () => {
       reports.map(report => (amount += Math.round(report.amount)));
       setTotalAmount(amount);
     }
-  }, []);
+  }, [gateways, postReport, projects, reports]);
   return (
     <>
       <Flex {...ContainerStyle}>
@@ -37,7 +37,7 @@ export const ProjectOneGatewayOne = () => {
           ]}
         />
         {!reports ? (
-          <MockProjectOneGatewayOne />
+          <MockProjectOneAllGateways />
         ) : (
           reports.map((report, index) => (
             <TableRow
@@ -48,7 +48,7 @@ export const ProjectOneGatewayOne = () => {
         )}
       </Flex>
       <Text {...TotalBottomSectionStyle}>
-        {!reports ? (
+        {reports ? (
           messages.paragraphs.totalBottom
         ) : (
           <>

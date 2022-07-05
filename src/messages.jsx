@@ -36,6 +36,7 @@ export const messages = {
     date2: '01/21/2021',
     date3: '01/24/2021',
     date4: '01/27/2021',
+    gateway: 'Gateway',
     gateway1: 'Gateway 1',
     gateway2: 'Gateway 2',
     gateway3: 'Gateway 3',
