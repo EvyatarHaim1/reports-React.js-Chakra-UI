@@ -66,10 +66,10 @@ export const Reports = () => {
 
   return (
     <Box>
-      {handleToast()}
-      {!reports.length ? (
-        <NoReport />
-      ) : (
+      {/* {handleToast()} */}
+      {/* {!reports.length ? ( */}
+      <NoReport />
+      {/* ) : (
         <Box>
           <FilterSearch />
           <Text>{messages.titles.allPayments}</Text>
@@ -103,7 +103,7 @@ export const Reports = () => {
             </Table>
           </TableContainer>
         </Box>
-      )}
+      )} */}
     </Box>
   );
 };

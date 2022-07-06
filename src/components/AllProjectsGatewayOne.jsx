@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
-import { projectsIndex } from '../helpers';
+import { calculateTotal, projectsIndex } from '../helpers';
 import { ProjectColorIndex } from './common/ProjectColorIndex';
 import CustomPieChart from './common/PieChart';
 import { TableRow } from './common/TableRow';
@@ -16,75 +16,96 @@ import {
   TitleStyle,
   TotalTextStyle,
 } from '../theme/classes';
+import AppContext from '../contexts/AppContext';
+import { MockAllProjectsGatewayOne } from './mocks/MockAllProjectsGatewayOne';
 
-export const AllProjectsGatewayOne = () => (
-  <Flex w="100%" mb="107px">
-    <Flex {...LeftBlockStyle}>
-      <Heading {...TitleStyle}>{messages.titles.allProjectsGatewayOne}</Heading>
-      <ProjectRow
-        project={messages.titles.project1}
-        total={messages.paragraphs.totalTop}
-      />
-      <TableRow
-        gatewayOne
-        columns={[
-          messages.paragraphs.date,
-          messages.paragraphs.transactionID,
-          messages.paragraphs.amount,
-        ]}
-      />
-      <TableRow
-        bgColor="lightBlue.100"
-        columns={[
-          messages.paragraphs.date2,
-          messages.paragraphs.transactionExp,
-          messages.paragraphs.amount1,
-        ]}
-      />
-      <TableRow
-        columns={[
-          messages.paragraphs.date3,
-          messages.paragraphs.transactionExp,
-          messages.paragraphs.amount2,
-        ]}
-      />
-      <TableRow
-        bgColor="lightBlue.100"
-        columns={[
-          messages.paragraphs.date4,
-          messages.paragraphs.transactionExp,
-          messages.paragraphs.amount3,
-        ]}
-      />
-      <ProjectRow
-        topSpace
-        project={messages.titles.project2}
-        total={messages.paragraphs.rowTotal}
-      />
-      <ProjectRow
-        project={messages.titles.project3}
-        total={messages.paragraphs.rowTotal}
-      />
-      <ProjectRow
-        project={messages.titles.project4}
-        total={messages.paragraphs.rowTotal}
-      />
-    </Flex>
+export const AllProjectsGatewayOne = () => {
+  const {
+    reports,
+    formatReports,
+    gateways,
+    postReport,
+    gatewaysState,
+    projectsState,
+    setCurrentScreen,
+  } = useContext(AppContext);
+  const [gateway, setGateway] = useState(gateways[0]);
 
-    <Flex {...RightBlockStyle}>
-      <Flex {...ButtonSectionStyle}>
-        {projectsIndex.map(({ name, color }) => (
-          <Flex key={name} align="center">
-            <ProjectColorIndex color={color} />
-            <Text {...ProjectTextStyle}>{name}</Text>
-          </Flex>
-        ))}
+  useEffect(() => {
+    postReport({
+      gatewayId: gateway,
+    });
+  }, []);
+
+  return (
+    <Flex w="100%" mb="107px">
+      <Flex {...LeftBlockStyle}>
+        <Heading {...TitleStyle}>
+          {`${projectsState} | ${gatewaysState}`}
+        </Heading>
+        {!reports
+          ? // <MockAllProjectsGatewayOne />
+            setCurrentScreen('Report')
+          : formatReports.map(project => (
+              <>
+                <ProjectRow
+                  key={project[0].name}
+                  project={project[0].name}
+                  total={
+                    <>
+                      {messages.paragraphs.total}{' '}
+                      {calculateTotal(
+                        project.map(
+                          (reports, index) =>
+                            index > 0 &&
+                            reports
+                              .filter(
+                                r => r[Number(gatewaysState.slice(-1)) - 1]
+                              )
+                              ?.map(r => Number(Math.round(r.amount)))
+                        )
+                      )}{' '}
+                      {messages.paragraphs.dollar}
+                    </>
+                  }
+                />
+                <TableRow
+                  gatewayOne
+                  columns={[
+                    messages.paragraphs.date,
+                    messages.paragraphs.transactionID,
+                    messages.paragraphs.amount,
+                  ]}
+                />
+                {project.map(
+                  (reports, index) =>
+                    index > 0 &&
+                    reports.map((row, index) => (
+                      <TableRow
+                        key={row.paymentId}
+                        columns={[row.created, row.paymentId, row.amount]}
+                      />
+                    ))
+                )}
+              </>
+            ))}
       </Flex>
 
-      <Box {...PieChartStyle}>
-        <CustomPieChart />
-      </Box>
-      <Text {...TotalTextStyle}>{messages.paragraphs.gatewayTotal}</Text>
+      <Flex {...RightBlockStyle}>
+        <Flex {...ButtonSectionStyle}>
+          {projectsIndex.map(({ name, color }) => (
+            <Flex key={name} align="center">
+              <ProjectColorIndex color={color} />
+              <Text {...ProjectTextStyle}>{name}</Text>
+            </Flex>
+          ))}
+        </Flex>
+
+        <Box {...PieChartStyle}>
+          <CustomPieChart />
+        </Box>
+        <Text {...TotalTextStyle}>{messages.paragraphs.gatewayTotal}</Text>
+      </Flex>
     </Flex>
-  </Flex>
-);
+  );
+};

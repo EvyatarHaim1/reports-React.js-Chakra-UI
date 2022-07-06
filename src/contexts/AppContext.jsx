@@ -16,29 +16,34 @@ export function AppProvider({ children }) {
   const [isOpenModal, setOpenModal] = useState(true);
   const [isProjectModal, setProjectModal] = useState(false);
   const [isGatewayModal, setGatewayModal] = useState(false);
-  const [projectsState, setProjectsState] = useState('');
-  const [gatewaysState, setGatewaysState] = useState('');
+  const [projectsState, setProjectsState] = useState('All Projects');
+  const [gatewaysState, setGatewaysState] = useState('All Gateways');
   const [showToast, setShowToast] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
+  const [formatReports, setFormatReports] = useState([]);
 
   useEffect(() => {
     fetchUsers();
     fetchProjects();
     fetchGateways();
+    postReport({
+      from: '2021-01-01',
+      to: '2021-12-31',
+    });
   }, []);
 
   useEffect(() => {
-    if (projectsState === 'Project 1') {
-      if (gatewaysState === 'Gateway 1') {
-        setCurrentScreen('ProjectOneGatewayOne');
-      } else {
+    if (projectsState !== 'All Projects') {
+      if (gatewaysState === 'All Gateways') {
         setCurrentScreen('ProjectOneAllGateways');
+      } else {
+        setCurrentScreen('ProjectOneGatewayOne');
       }
     } else if (projectsState === 'All Projects') {
-      if (gatewaysState === 'Gateway 1') {
-        setCurrentScreen('AllProjectsGatewayOne');
-      } else {
+      if (gatewaysState === 'All Gateways') {
         setCurrentScreen('AllProjectsAllGateways');
+      } else {
+        setCurrentScreen('AllProjectsGatewayOne');
       }
     }
   }, [projectsState, gatewaysState]);
@@ -54,6 +59,10 @@ export function AppProvider({ children }) {
       setGatewayModal(true);
     }
   }, [gatewaysState]);
+
+  useEffect(() => {
+    formatProjects();
+  }, [projects]);
 
   const fetchUsers = () => {
     axios
@@ -97,10 +106,29 @@ export function AppProvider({ children }) {
         );
         setReports(formatReports);
         setFilteredReports(formatReports);
-        // setCurrentScreen('Report');
         setShowToast(true);
       })
       .catch(error => console.error(`Something went wrong ${error}`));
+  };
+
+  const formatProjects = () => {
+    let formatedProjects = [];
+    projects.map(project => formatedProjects.push([project]));
+
+    projects.map((project, index) =>
+      gateways.map(gateway =>
+        formatedProjects[index].push(
+          reports.filter(
+            report =>
+              report.projectId?.toLowerCase() ===
+                project.projectId?.toLowerCase() &&
+              report.gatewayId?.toLowerCase() ===
+                gateway.gatewayId?.toLowerCase()
+          )
+        )
+      )
+    );
+    setFormatReports(formatedProjects);
   };
 
   const openModal = () => setOpenModal(true);
@@ -152,6 +180,8 @@ export function AppProvider({ children }) {
         setFilteredReports,
         isFiltered,
         setIsFiltered,
+        formatReports,
+        setFormatReports,
       }}
     >
       {children}

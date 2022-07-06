@@ -18,13 +18,14 @@ export const ProjectOneGatewayOne = () => {
     gateways,
     projectsState,
     gatewaysState,
+    setCurrentScreen,
   } = useContext(AppContext);
 
   let projectToReport =
-    projects[projectsState === 'Project 1' ? 0 : 1].projectId;
+    projects[projectsState === 'Project 1' ? 0 : 1]?.projectId;
 
   let gatewayToReport =
-    gateways[gatewaysState === 'Gateway 1' ? 0 : 1].projectId;
+    gateways[gatewaysState === 'Gateway 1' ? 0 : 1]?.projectId;
 
   useEffect(() => {
     postReport({
@@ -35,6 +36,7 @@ export const ProjectOneGatewayOne = () => {
     if (reports) {
       reports.map(report => (amount += Math.round(report.amount)));
       setTotalAmount(amount);
+      setTitle(`${projectsState} | ${gatewaysState}`);
     }
   }, [
     gateways,
@@ -43,14 +45,14 @@ export const ProjectOneGatewayOne = () => {
     reports,
     projectToReport,
     gatewayToReport,
+    projectsState,
+    gatewaysState,
   ]);
 
   return (
     <>
       <Flex {...ContainerStyle}>
-        <Heading {...TitleStyle}>
-          {messages.titles.projectOneGatewayOne}
-        </Heading>
+        <Heading {...TitleStyle}>{title}</Heading>
         <TableRow
           gatewayOne
           columns={[
@@ -59,16 +61,15 @@ export const ProjectOneGatewayOne = () => {
             messages.paragraphs.amount,
           ]}
         />
-        {!reports ? (
-          <MockProjectOneAllGateways />
-        ) : (
-          reports.map((report, index) => (
-            <TableRow
-              bgColor={index % 2 === 0 && 'lightBlue.100'}
-              columns={[report.created, report.paymentId, report.amount]}
-            />
-          ))
-        )}
+        {!reports
+          ? // <MockProjectOneAllGateways />
+            setCurrentScreen('Report')
+          : reports.map((report, index) => (
+              <TableRow
+                bgColor={index % 2 === 0 && 'lightBlue.100'}
+                columns={[report.created, report.paymentId, report.amount]}
+              />
+            ))}
       </Flex>
       <Text {...TotalBottomSectionStyle}>
         {!reports ? (

@@ -7,36 +7,28 @@ import { TableRow } from './common/TableRow';
 import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
 import AppContext from '../contexts/AppContext';
 import { MockAllProjectsAllGateways } from './mocks/MockAllProjectsAllGateways';
+import { calculateTotal } from '../helpers';
 
 export const AllProjectsAllGateways = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [projectTotal, setProjectTotal] = useState([]);
-  const { reports, postReport, projects, gateways } = useContext(AppContext);
+  const [total, setTotal] = useState(0);
+  const { reports, gateways, setCurrentScreen, formatReports } =
+    useContext(AppContext);
 
   useEffect(() => {
-    postReport({
-      from: '2021-01-01',
-      to: '2021-12-31',
-    });
-    let amount = 0;
-    if (reports) {
-      reports.map(report => (amount += Math.round(report.amount)));
-      setTotalAmount(amount);
-    }
-  }, [gateways, postReport, projects, reports]);
-
-  useEffect(() => {
-    let sum = 0;
-    projects.map(project =>
-      reports
-        .filter(
-          report =>
-            report.projectId.toLowerCase() === project.projectId.toLowerCase()
-        )
-        .map(r => console.log(Number(Math.round(r.amount))))
-    );
-    setProjectTotal(prev => [...prev, sum]);
-    console.log(projectTotal);
+    const totalAmount = () => {
+      let temp = 0;
+      formatReports.map(
+        project =>
+          (temp += calculateTotal(
+            project.map(
+              (reports, index) =>
+                index > 0 && reports?.map(r => Number(Math.round(r.amount)))
+            )
+          ))
+      );
+      setTotal(temp);
+    };
+    totalAmount();
   }, []);
 
   return (
@@ -47,20 +39,28 @@ export const AllProjectsAllGateways = () => {
         </Box>
 
         {!reports ? (
-          <MockAllProjectsAllGateways />
+          // <MockAllProjectsAllGateways />
+          setCurrentScreen('Report')
         ) : (
           <>
-            {projects.map((project, index) => (
+            {formatReports?.map(project => (
               <>
                 <ProjectRow
-                  key={project.name}
-                  project={project.name}
+                  key={project[0]?.name}
+                  project={project[0]?.name}
                   total={
                     !reports ? (
                       messages.paragraphs.totalTop
                     ) : (
                       <>
-                        {messages.paragraphs.total} {projectTotal[index]}{' '}
+                        {messages.paragraphs.total}{' '}
+                        {calculateTotal(
+                          project.map(
+                            (reports, index) =>
+                              index > 0 &&
+                              reports?.map(r => Number(Math.round(r.amount)))
+                          )
+                        )}{' '}
                         {messages.paragraphs.dollar}
                       </>
                     )
@@ -75,27 +75,25 @@ export const AllProjectsAllGateways = () => {
                     messages.paragraphs.amount,
                   ]}
                 />
-                {reports
-                  .filter(
-                    report =>
-                      report.projectId.toLowerCase() ===
-                      project.projectId.toLowerCase()
-                  )
-                  .map((row, index) => (
-                    <TableRow
-                      key={row.paymentId}
-                      reports={reports}
-                      bgColor={index % 2 !== 0 && 'lightBlue.100'}
-                      columns={[
-                        row.created,
-                        gateways.find(
-                          g => g.gatewayId.toLowerCase() === row?.gatewayId
-                        )?.name,
-                        row.paymentId,
-                        row.amount,
-                      ]}
-                    />
-                  ))}
+                {project.map(
+                  (reports, index) =>
+                    index > 0 &&
+                    reports.map((row, index) => (
+                      <TableRow
+                        key={row.paymentId}
+                        reports={reports}
+                        bgColor={index % 2 !== 0 && 'lightBlue.100'}
+                        columns={[
+                          row.created,
+                          gateways.find(
+                            g => g.gatewayId.toLowerCase() === row?.gatewayId
+                          )?.name,
+                          row.paymentId,
+                          row.amount,
+                        ]}
+                      />
+                    ))
+                )}
               </>
             ))}
           </>
@@ -106,8 +104,7 @@ export const AllProjectsAllGateways = () => {
           messages.paragraphs.totalBottom
         ) : (
           <>
-            {messages.paragraphs.total} {totalAmount}{' '}
-            {messages.paragraphs.dollar}
+            {messages.paragraphs.total} {total} {messages.paragraphs.dollar}
           </>
         )}
       </Text>

@@ -7,6 +7,10 @@ import { TableRow } from '../common/TableRow';
 export const MockProjectOneAllGateways = () => {
   return (
     <>
+      <ProjectRow
+        project={messages.paragraphs.gateway1}
+        total={messages.paragraphs.totalTop}
+      />
       <TableRow
         bgColor="lightBlue.100"
         columns={[

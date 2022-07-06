@@ -22,56 +22,77 @@ import AppContext from '../contexts/AppContext';
 export const ProjectOneAllGateways = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [gatewaysTotal, setGatewaysTotal] = useState(0);
-  const { reports, postReport, projects, gateways } = useContext(AppContext);
+  const [title, setTitle] = useState(messages.titles.projectOneAllGateways);
+
+  const {
+    reports,
+    postReport,
+    projects,
+    gateways,
+    projectsState,
+    gatewaysState,
+    setCurrentScreen,
+  } = useContext(AppContext);
 
   useEffect(() => {
     postReport({
-      projectId: projects[0].projectId,
+      projectId:
+        projects[Number(projectsState.charAt(projectsState.length - 1)) - 1]
+          ?.projectId,
     });
     let amount = 0;
     if (reports) {
       reports.map(report => (amount += Math.round(report.amount)));
       setTotalAmount(amount);
     }
-  }, [gateways, postReport, projects, reports]);
+    setTitle(`${projectsState} | ${gatewaysState}`);
+  }, [gateways, gatewaysState, postReport, projects, projectsState, reports]);
 
   return (
     <Flex {...ContainerStyle}>
       <Flex {...LeftBlockStyle}>
-        <Heading {...TitleStyle}>
-          {messages.titles.projectOneAllGateways}
-        </Heading>
-        <ProjectRow
-          project={messages.paragraphs.gateway1}
-          total={
-            !reports ? (
-              messages.paragraphs.totalTop
-            ) : (
+        <Heading {...TitleStyle}>{title}</Heading>
+        {!reports // <MockProjectOneAllGateways />
+          ? setCurrentScreen('Report')
+          : gateways.map(gateway => (
               <>
-                {messages.paragraphs.total} {totalAmount}{' '}
-                {messages.paragraphs.dollar}
+                <ProjectRow
+                  key={gateway.name}
+                  project={gateway.name}
+                  total={
+                    <>
+                      {messages.paragraphs.total} {totalAmount}{' '}
+                      {messages.paragraphs.dollar}
+                    </>
+                  }
+                />
+                <TableRow
+                  gatewayOne
+                  columns={[
+                    messages.paragraphs.date,
+                    messages.paragraphs.transactionID,
+                    messages.paragraphs.amount,
+                  ]}
+                />
+                {reports
+                  .filter(
+                    r =>
+                      r.gatewayId.toLowerCase() ===
+                      gateway.gatewayId.toLowerCase()
+                  )
+                  .map((report, index) => (
+                    <TableRow
+                      key={report.paymentId}
+                      bgColor={index % 2 === 0 && 'lightBlue.100'}
+                      columns={[
+                        report.created,
+                        report.paymentId,
+                        report.amount,
+                      ]}
+                    />
+                  ))}
               </>
-            )
-          }
-        />
-        <TableRow
-          gatewayOne
-          columns={[
-            messages.paragraphs.date,
-            messages.paragraphs.transactionID,
-            messages.paragraphs.amount,
-          ]}
-        />
-        {reports ? (
-          <MockProjectOneAllGateways />
-        ) : (
-          reports.map((report, index) => (
-            <TableRow
-              bgColor={index % 2 === 0 && 'lightBlue.100'}
-              columns={[report.created, report.paymentId, report.amount]}
-            />
-          ))
-        )}
+            ))}
       </Flex>
 
       <Flex {...RightBlockStyle}>
@@ -92,7 +113,7 @@ export const ProjectOneAllGateways = () => {
             messages.paragraphs.gatewayTotal
           ) : (
             <>
-              {messages.paragraphs.total} {gatewaysTotal}{' '}
+              {messages.paragraphs.total} {totalAmount}{' '}
               {messages.paragraphs.dollar}
             </>
           )}
