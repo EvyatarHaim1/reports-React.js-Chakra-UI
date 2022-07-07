@@ -23,8 +23,8 @@ export const ProjectOneAllGateways = () => {
   const [totalAmount, setTotalAmount] = useState(
     messages.paragraphs.gatewayTotal
   );
-  const [totals, setTotals] = useState([]);
   const [title, setTitle] = useState(messages.titles.projectOneAllGateways);
+  const [gatewayAmount, setGatewayAmount] = useState([]);
 
   const {
     reports,
@@ -48,23 +48,25 @@ export const ProjectOneAllGateways = () => {
       setTotalAmount(amount);
     }
     setTitle(`${projectsState} | ${gatewaysState}`);
+
+    const calcGatewayAmount = () => {
+      let temp = 0;
+      let arr = [];
+      gateways.map(g => {
+        temp = 0;
+        reports
+          .filter(
+            r => r.gatewayId?.toLowerCase() === g.gatewayId?.toLowerCase()
+          )
+          .map(r => (temp += Number(Math.round(r.amount))));
+
+        return arr.push(temp);
+      });
+      setGatewayAmount(arr);
+    };
+
+    calcGatewayAmount();
   }, [gateways, gatewaysState, postReport, projects, projectsState, reports]);
-
-  useEffect(() => {
-    calcGatewayTotal();
-  }, [projectsState]);
-
-  const calcGatewayTotal = () => {
-    let temp = 0;
-    gateways.map(g =>
-      reports.map(r => {
-        if (r.gatewayId.toLowerCase() === g.gatewayId.toLowerCase())
-          temp += Number(Math.round(r.amount));
-        setTotals(temp);
-        return temp;
-      })
-    );
-  };
 
   return (
     <Flex {...ContainerStyle}>
@@ -82,7 +84,7 @@ export const ProjectOneAllGateways = () => {
                       messages.paragraphs.totalTop
                     ) : (
                       <>
-                        {messages.paragraphs.total} {totals[index]}{' '}
+                        {messages.paragraphs.total} {gatewayAmount[index]}{' '}
                         {messages.paragraphs.dollar}
                       </>
                     )

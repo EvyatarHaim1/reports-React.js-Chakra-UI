@@ -32,7 +32,7 @@ export const AllProjectsGatewayOne = () => {
   } = useContext(AppContext);
 
   const [totalAmount, setTotalAmount] = useState(0);
-  const [gatewayAmount, setGatewayAmount] = useState(0);
+  const [gatewayAmount, setGatewayAmount] = useState([]);
 
   useEffect(() => {
     postReport({
@@ -47,23 +47,28 @@ export const AllProjectsGatewayOne = () => {
 
     const calcGatewayAmount = () => {
       let temp = 0;
-      reports.map(r => {
-        if (
-          r.gatewayId ===
-            gateways[Number(gatewaysState.charAt(gatewaysState.length - 1)) - 1]
-              ?.gatewayId &&
-          projects[Number(projectsState.charAt(projectsState.length - 1)) - 1]
-            ?.projectId
-        ) {
-          temp += Number(Math.round(r.amount));
-        }
-        return temp;
+      let arr = [];
+      projects.map(p => {
+        temp = 0;
+        reports
+          .filter(r => r.projectId.toLowerCase() === p.projectId.toLowerCase())
+          .map(r => (temp += Number(Math.round(r.amount))));
+
+        return arr.push(temp);
       });
-      setGatewayAmount(temp);
+      setGatewayAmount(arr);
     };
 
     calcGatewayAmount();
-  }, [gateways, gatewaysState, postReport, projects, projectsState, reports]);
+  }, [
+    gatewayAmount,
+    gateways,
+    gatewaysState,
+    postReport,
+    projects,
+    projectsState,
+    reports,
+  ]);
 
   return (
     <Flex w="100%" mb="107px">
@@ -74,14 +79,14 @@ export const AllProjectsGatewayOne = () => {
         {!reports
           ? // <MockAllProjectsGatewayOne />
             setCurrentScreen('Report')
-          : formatReports?.map(project => (
+          : formatReports?.map((project, index) => (
               <>
                 <ProjectRow
                   key={project[0].name}
                   project={project[0].name}
                   total={
                     <>
-                      {messages.paragraphs.total} {gatewayAmount}{' '}
+                      {messages.paragraphs.total} {gatewayAmount[index]}{' '}
                       {messages.paragraphs.dollar}
                     </>
                   }
