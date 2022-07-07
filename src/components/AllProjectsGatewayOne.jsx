@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { messages } from '../messages';
-import { calculateTotal, projectsIndex } from '../helpers';
+import { projectsIndex } from '../helpers';
 import { ProjectColorIndex } from './common/ProjectColorIndex';
 import CustomPieChart from './common/PieChart';
 import { TableRow } from './common/TableRow';
@@ -60,15 +60,7 @@ export const AllProjectsGatewayOne = () => {
     };
 
     calcGatewayAmount();
-  }, [
-    gatewayAmount,
-    gateways,
-    gatewaysState,
-    postReport,
-    projects,
-    projectsState,
-    reports,
-  ]);
+  }, [gatewaysState]);
 
   const data = [
     {

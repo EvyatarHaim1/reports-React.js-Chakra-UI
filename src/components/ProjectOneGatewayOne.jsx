@@ -36,7 +36,16 @@ export const ProjectOneGatewayOne = () => {
       setTotalAmount(amount);
       setTitle(`${projectsState} | ${gatewaysState}`);
     }
-  }, [postReport, reports, projectsState, gatewaysState, projects, gateways]);
+  }, [
+    postReport,
+    reports,
+    projectsState,
+    gatewaysState,
+    projects,
+    gateways,
+    totalAmount,
+    title,
+  ]);
 
   return (
     <>

@@ -29,7 +29,7 @@ export const AllProjectsAllGateways = () => {
       setTotal(temp);
     };
     totalAmount();
-  }, [formatReports]);
+  }, [total, formatReports]);
 
   return (
     <>

@@ -66,7 +66,7 @@ export const ProjectOneAllGateways = () => {
     };
 
     calcGatewayAmount();
-  }, [gateways, gatewaysState, postReport, projects, projectsState, reports]);
+  }, [projectsState]);
 
   const data = [
     {
