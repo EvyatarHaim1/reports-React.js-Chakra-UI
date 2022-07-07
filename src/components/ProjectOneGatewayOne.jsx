@@ -8,9 +8,6 @@ import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
 import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 
 export const ProjectOneGatewayOne = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [title, setTitle] = useState(messages.titles.projectOneGatewayOne);
-
   const {
     reports,
     postReport,
@@ -21,16 +18,17 @@ export const ProjectOneGatewayOne = () => {
     setCurrentScreen,
   } = useContext(AppContext);
 
-  let projectToReport =
-    projects[projectsState === 'Project 1' ? 0 : 1]?.projectId;
-
-  let gatewayToReport =
-    gateways[gatewaysState === 'Gateway 1' ? 0 : 1]?.projectId;
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [title, setTitle] = useState(messages.titles.projectOneGatewayOne);
 
   useEffect(() => {
     postReport({
-      projectId: projectToReport,
-      gatewayId: gatewayToReport,
+      projectId:
+        projects[Number(projectsState.charAt(projectsState.length - 1)) - 1]
+          ?.projectId,
+      gatewayId:
+        gateways[Number(gatewaysState.charAt(gatewaysState.length - 1)) - 1]
+          ?.gatewayId,
     });
     let amount = 0;
     if (reports) {
@@ -38,16 +36,7 @@ export const ProjectOneGatewayOne = () => {
       setTotalAmount(amount);
       setTitle(`${projectsState} | ${gatewaysState}`);
     }
-  }, [
-    gateways,
-    postReport,
-    projects,
-    reports,
-    projectToReport,
-    gatewayToReport,
-    projectsState,
-    gatewaysState,
-  ]);
+  }, [postReport, reports, projectsState, gatewaysState, projects, gateways]);
 
   return (
     <>

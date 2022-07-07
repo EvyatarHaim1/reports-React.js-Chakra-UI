@@ -20,8 +20,10 @@ import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 import AppContext from '../contexts/AppContext';
 
 export const ProjectOneAllGateways = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [gatewaysTotal, setGatewaysTotal] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(
+    messages.paragraphs.gatewayTotal
+  );
+  const [totals, setTotals] = useState([]);
   const [title, setTitle] = useState(messages.titles.projectOneAllGateways);
 
   const {
@@ -48,22 +50,42 @@ export const ProjectOneAllGateways = () => {
     setTitle(`${projectsState} | ${gatewaysState}`);
   }, [gateways, gatewaysState, postReport, projects, projectsState, reports]);
 
+  useEffect(() => {
+    calcGatewayTotal();
+  }, [projectsState]);
+
+  const calcGatewayTotal = () => {
+    let temp = 0;
+    gateways.map(g =>
+      reports.map(r => {
+        if (r.gatewayId.toLowerCase() === g.gatewayId.toLowerCase())
+          temp += Number(Math.round(r.amount));
+        setTotals(temp);
+        return temp;
+      })
+    );
+  };
+
   return (
     <Flex {...ContainerStyle}>
       <Flex {...LeftBlockStyle}>
         <Heading {...TitleStyle}>{title}</Heading>
         {!reports // <MockProjectOneAllGateways />
           ? setCurrentScreen('Report')
-          : gateways.map(gateway => (
+          : gateways.map((gateway, index) => (
               <>
                 <ProjectRow
                   key={gateway.name}
                   project={gateway.name}
                   total={
-                    <>
-                      {messages.paragraphs.total} {totalAmount}{' '}
-                      {messages.paragraphs.dollar}
-                    </>
+                    !reports ? (
+                      messages.paragraphs.totalTop
+                    ) : (
+                      <>
+                        {messages.paragraphs.total} {totals[index]}{' '}
+                        {messages.paragraphs.dollar}
+                      </>
+                    )
                   }
                 />
                 <TableRow
@@ -75,7 +97,7 @@ export const ProjectOneAllGateways = () => {
                   ]}
                 />
                 {reports
-                  .filter(
+                  ?.filter(
                     r =>
                       r.gatewayId.toLowerCase() ===
                       gateway.gatewayId.toLowerCase()

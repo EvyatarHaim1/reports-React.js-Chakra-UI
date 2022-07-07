@@ -13,7 +13,7 @@ export const GatewaysDropdown = () => {
 
   const handleSelect = e => {
     setselected(e.target.value);
-    setGatewaysState(e.target.value);
+    setGatewaysState(e.target.value || messages.titles.gateways);
   };
 
   return (

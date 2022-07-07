@@ -13,7 +13,7 @@ export const ProjectDropDown = () => {
 
   const handleSelect = e => {
     setselected(e.target.value);
-    setProjectsState(e.target.value);
+    setProjectsState(e.target.value || messages.titles.projects);
   };
 
   return (

@@ -24,18 +24,46 @@ export const AllProjectsGatewayOne = () => {
     reports,
     formatReports,
     gateways,
+    projects,
     postReport,
     gatewaysState,
     projectsState,
     setCurrentScreen,
   } = useContext(AppContext);
-  const [gateway, setGateway] = useState(gateways[0]);
+
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [gatewayAmount, setGatewayAmount] = useState(0);
 
   useEffect(() => {
     postReport({
-      gatewayId: gateway,
+      gatewayId:
+        gateways[Number(gatewaysState.charAt(gatewaysState.length - 1)) - 1]
+          ?.gatewayId,
     });
-  }, []);
+
+    let totalTemp = 0;
+    reports.map(r => (totalTemp += Number(Math.round(r.amount))));
+    setTotalAmount(totalTemp);
+
+    const calcGatewayAmount = () => {
+      let temp = 0;
+      reports.map(r => {
+        if (
+          r.gatewayId ===
+            gateways[Number(gatewaysState.charAt(gatewaysState.length - 1)) - 1]
+              ?.gatewayId &&
+          projects[Number(projectsState.charAt(projectsState.length - 1)) - 1]
+            ?.projectId
+        ) {
+          temp += Number(Math.round(r.amount));
+        }
+        return temp;
+      });
+      setGatewayAmount(temp);
+    };
+
+    calcGatewayAmount();
+  }, [gateways, gatewaysState, postReport, projects, projectsState, reports]);
 
   return (
     <Flex w="100%" mb="107px">
@@ -46,25 +74,14 @@ export const AllProjectsGatewayOne = () => {
         {!reports
           ? // <MockAllProjectsGatewayOne />
             setCurrentScreen('Report')
-          : formatReports.map(project => (
+          : formatReports?.map(project => (
               <>
                 <ProjectRow
                   key={project[0].name}
                   project={project[0].name}
                   total={
                     <>
-                      {messages.paragraphs.total}{' '}
-                      {calculateTotal(
-                        project.map(
-                          (reports, index) =>
-                            index > 0 &&
-                            reports
-                              .filter(
-                                r => r[Number(gatewaysState.slice(-1)) - 1]
-                              )
-                              ?.map(r => Number(Math.round(r.amount)))
-                        )
-                      )}{' '}
+                      {messages.paragraphs.total} {gatewayAmount}{' '}
                       {messages.paragraphs.dollar}
                     </>
                   }
@@ -77,10 +94,10 @@ export const AllProjectsGatewayOne = () => {
                     messages.paragraphs.amount,
                   ]}
                 />
-                {project.map(
+                {project?.map(
                   (reports, index) =>
                     index > 0 &&
-                    reports.map((row, index) => (
+                    reports?.map((row, index) => (
                       <TableRow
                         key={row.paymentId}
                         columns={[row.created, row.paymentId, row.amount]}
@@ -93,7 +110,7 @@ export const AllProjectsGatewayOne = () => {
 
       <Flex {...RightBlockStyle}>
         <Flex {...ButtonSectionStyle}>
-          {projectsIndex.map(({ name, color }) => (
+          {projectsIndex?.map(({ name, color }) => (
             <Flex key={name} align="center">
               <ProjectColorIndex color={color} />
               <Text {...ProjectTextStyle}>{name}</Text>
@@ -104,7 +121,16 @@ export const AllProjectsGatewayOne = () => {
         <Box {...PieChartStyle}>
           <CustomPieChart />
         </Box>
-        <Text {...TotalTextStyle}>{messages.paragraphs.gatewayTotal}</Text>
+        <Text {...TotalTextStyle}>
+          {!reports ? (
+            messages.paragraphs.gatewayTotal
+          ) : (
+            <>
+              {messages.paragraphs.total} {totalAmount}{' '}
+              {messages.paragraphs.dollar}
+            </>
+          )}
+        </Text>
       </Flex>
     </Flex>
   );
