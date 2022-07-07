@@ -70,6 +70,29 @@ export const AllProjectsGatewayOne = () => {
     reports,
   ]);
 
+  const data = [
+    {
+      name: 'Group C',
+      value: 0,
+      color: '#6497B1',
+    },
+    {
+      name: 'Group A',
+      value: gatewayAmount[0] / totalAmount,
+      color: '#A259FF',
+    },
+    {
+      name: 'Group B',
+      value: gatewayAmount[1] / totalAmount,
+      color: '#F24E1E',
+    },
+    {
+      name: 'Group D',
+      value: 0,
+      color: '#FFC107',
+    },
+  ];
+
   return (
     <Flex w="100%" mb="107px">
       <Flex {...LeftBlockStyle}>
@@ -124,7 +147,7 @@ export const AllProjectsGatewayOne = () => {
         </Flex>
 
         <Box {...PieChartStyle}>
-          <CustomPieChart />
+          <CustomPieChart reports={reports} data={data} />
         </Box>
         <Text {...TotalTextStyle}>
           {!reports ? (

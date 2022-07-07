@@ -68,6 +68,29 @@ export const ProjectOneAllGateways = () => {
     calcGatewayAmount();
   }, [gateways, gatewaysState, postReport, projects, projectsState, reports]);
 
+  const data = [
+    {
+      name: 'Group C',
+      value: 0,
+      color: '#6497B1',
+    },
+    {
+      name: 'Group A',
+      value: gatewayAmount[0] / totalAmount,
+      color: '#A259FF',
+    },
+    {
+      name: 'Group B',
+      value: gatewayAmount[1] / totalAmount,
+      color: '#F24E1E',
+    },
+    {
+      name: 'Group D',
+      value: 0,
+      color: '#FFC107',
+    },
+  ];
+
   return (
     <Flex {...ContainerStyle}>
       <Flex {...LeftBlockStyle}>
@@ -130,7 +153,7 @@ export const ProjectOneAllGateways = () => {
         </Flex>
 
         <Box {...PieChartStyle}>
-          <CustomPieChart />
+          <CustomPieChart reports={reports} data={data} />
         </Box>
         <Text {...TotalTextStyle}>
           {!gateways ? (

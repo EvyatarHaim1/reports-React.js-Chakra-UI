@@ -39,7 +39,7 @@ export default class CustomPieChart extends PureComponent {
     return (
       <PieChart width={270} height={270}>
         <Pie
-          data={data}
+          data={this.props.reports ? this.props.data : data}
           cx="50%"
           cy="50%"
           labelLine={false}
