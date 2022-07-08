@@ -15,7 +15,7 @@ export const TopSection = () => {
     if (!fromDate || !toDate) {
       alert(messages.alerts.twoDateMandatory);
     } else {
-      await postReport(fromDate, toDate);
+      await postReport({ from: fromDate, to: toDate });
     }
   };
 

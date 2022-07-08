@@ -65,6 +65,5 @@ export const calculateTotal = data => {
   let sum = 0;
   if (data.length > 2) data?.shift();
   data?.map(arr => arr?.map(amount => Number((sum += amount))));
-  console.log(sum);
   return sum;
 };

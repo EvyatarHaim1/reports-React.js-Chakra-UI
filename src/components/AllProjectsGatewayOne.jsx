@@ -17,7 +17,7 @@ import {
   TotalTextStyle,
 } from '../theme/classes';
 import AppContext from '../contexts/AppContext';
-import { MockAllProjectsGatewayOne } from './mocks/MockAllProjectsGatewayOne';
+// import { MockAllProjectsGatewayOne } from './mocks/MockAllProjectsGatewayOne';
 
 export const AllProjectsGatewayOne = () => {
   const {

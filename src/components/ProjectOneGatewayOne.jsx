@@ -5,7 +5,7 @@ import { messages } from '../messages';
 import { TableRow } from './common/TableRow';
 import AppContext from '../contexts/AppContext';
 import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
-import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
+// import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 
 export const ProjectOneGatewayOne = () => {
   const {

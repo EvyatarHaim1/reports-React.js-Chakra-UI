@@ -6,13 +6,20 @@ import { ProjectRow } from './common/ProjectRow';
 import { TableRow } from './common/TableRow';
 import { TitleStyle, TotalBottomSectionStyle } from '../theme/classes';
 import AppContext from '../contexts/AppContext';
-import { MockAllProjectsAllGateways } from './mocks/MockAllProjectsAllGateways';
 import { calculateTotal } from '../helpers';
+// import { MockAllProjectsAllGateways } from './mocks/MockAllProjectsAllGateways';
 
 export const AllProjectsAllGateways = () => {
   const [total, setTotal] = useState(0);
-  const { reports, gateways, setCurrentScreen, formatReports } =
-    useContext(AppContext);
+  const {
+    reports,
+    gateways,
+    setCurrentScreen,
+    formatReports,
+    fromDate,
+    toDate,
+    postReport,
+  } = useContext(AppContext);
 
   useEffect(() => {
     const totalAmount = () => {
@@ -30,6 +37,15 @@ export const AllProjectsAllGateways = () => {
     };
     totalAmount();
   }, [total, formatReports]);
+
+  // useEffect(() => {
+  //   if (fromDate && toDate) {
+  //     postReport({
+  //       from: fromDate,
+  //       to: toDate,
+  //     });
+  //   }
+  // }, [fromDate, postReport, toDate]);
 
   return (
     <>

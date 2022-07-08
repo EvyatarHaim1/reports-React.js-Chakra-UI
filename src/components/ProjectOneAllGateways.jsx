@@ -16,8 +16,8 @@ import {
   TotalTextStyle,
 } from '../theme/classes';
 import CustomPieChart from './common/PieChart';
-import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 import AppContext from '../contexts/AppContext';
+// import { MockProjectOneAllGateways } from './mocks/MockProjectOneAllGateways';
 
 export const ProjectOneAllGateways = () => {
   const [totalAmount, setTotalAmount] = useState(
